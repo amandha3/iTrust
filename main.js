@@ -2,7 +2,6 @@ var fs = require('fs'),
     xml2js = require('xml2js'),
     child  = require('child_process'); 
 var parser = new xml2js.Parser();
-var HashMap = require('hashmap');
 
 var testReport =  '/simplecalc/target/surefire-reports/TEST-com.github.stokito.unitTestExample.calculator.CalculatorTest.xml';
 
