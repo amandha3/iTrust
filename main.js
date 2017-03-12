@@ -1,133 +1,101 @@
-var test = require('tap').test,
-    //fuzzer = require('fuzzer'),
-    Random = require('random-js')
-    marqdown = require('./marqdown.js'),
-    fs = require('fs'),
-    //stackTrace = require('stack-trace')
-    stackTrace = require('stacktrace-parser')
-    ;
+var fs = require('fs'),
+    xml2js = require('xml2js'),
+    child  = require('child_process'); 
+var parser = new xml2js.Parser();
+var HashMap = require('hashmap');
 
-var fuzzer = 
-{
-    random : new Random(Random.engines.mt19937().seed(0)),
-    
-    seed: function (kernel)
-    {
-        fuzzer.random = new Random(Random.engines.mt19937().seed(kernel));
-    },
+var testReport =  '/simplecalc/target/surefire-reports/TEST-com.github.stokito.unitTestExample.calculator.CalculatorTest.xml';
 
-    mutate:
-    {
-        string: function(val)
-        {
-            // MUTATE IMPLEMENTATION HERE
-            var array = val.split('');
+var walkSync = function(dir, filelist) {
+            var path = path || require('path');
+            var fs = fs || require('fs'),
+                files = fs.readdirSync(dir);
+            filelist = filelist || [];
+            files.forEach(function(file) {
+                if (fs.statSync(path.join(dir, file)).isDirectory()) {
+                    filelist = walkSync(path.join(dir, file), filelist);
+                }
+                else {
+                    filelist.push(path.join(dir, file));
+                }
+            });
+            return filelist;
+        };
 
-            do
+function compare(a,b)
             {
+                if(!a.failed && b.failed)
+                {
+                    return 1;
+                }
+                else if(a.failed && !b.failed)
+                {
+                    return -1;
+                }
+                else
+                    return a.time-b.time;
+                }
 
-	            if( fuzzer.random.bool(0.05) )
-	            {
-	                // REVERSE
-	                array = array.reverse();
-	            }
-
-	             if( fuzzer.random.bool(0.25) )
-	            {
-	                // ArraySplice
-	                //start = Random.integer(0, array.length);
-	                start = Random.integer(0, array.length);
-	                deleteCount = Random.integer(0, array.length);
-
-	                array.splice(start, deleteCount);
-	            }
-
-	            if( fuzzer.random.bool(0.25) )
-	            {
-	            	randomStr = new Random.string()(Random.engines.mt19937().seed(0),100);
-	            	console.log(randomStr);
-	            	randomArray = randomStr.split('');
-
-	            	array.splice.apply(array, [Random.integer(0, array.length), 0].concat(randomArray));
-	            }
-
-	         }while( fuzzer.random.bool(0.05) )
-
-
-
-            return array.join('');
-        }
-    }
-};
-
-fuzzer.seed(10);
-
-var failedTests = [];
-var reducedTests = [];
-var passedTests = 0;
-
-function mutationTesting()
+try{
+//    child.execSync('cd simplecalc; mvn test');
+}
+catch(e)
 {
-    var markDown = fs.readFileSync('test.md','utf-8');
-    //var markDown = fs.readFileSync('simple.md','utf-8');
+    //console.log(e);
+}
+    
 
-    for (var i = 0; i < 1000; i++) {
+var list = [];
 
-    	//Alternate between the md files
-    	if(i%2 == 0)
-    	{
-    		markDown = fs.readFileSync('test.md','utf-8');
-    	}
-    	else
-    	{
-    		markDown = fs.readFileSync('simple.md','utf-8');
-    	}
+filelist = []
 
-        var mutuatedString = fuzzer.mutate.string(markDown);
+filelist = walkSync(__dirname+'/target/surefire-reports',filelist);
 
-        try
-        {
-            marqdown.render(mutuatedString);
-            passedTests++;
-        }
-        catch(e)
-        {
-            failedTests.push( {input:mutuatedString, stack: e.stack} );
-            reducedTests.push(e.stack);
-        }
-    }
-
-    // RESULTS OF FUZZING
-    for( var i =0; i < failedTests.length; i++ )
+for( i=0; i < filelist.length; i++)
+{   
+//console.log("i: " + filelist[i])
+    if(filelist[i].endsWith('.xml'))
     {
-        var failed = failedTests[i];
 
-        var trace = stackTrace.parse( failed.stack );
-        var msg = failed.stack.split("\n")[0];
-        console.log( msg, trace[0].methodName, trace[0].lineNumber );
+        fs.readFile(filelist[i], function(err, data) {
+        parser.parseString(data, function (err, result) {
+            console.dir(result);
+            console.log(result.testsuite.testcase[0]);
+            // Print out everything
+            //console.dir(JSON.stringify(result,null, 3));
+
+            
+
+            for(var testCase in result.testsuite.testcase)
+            {
+                var t = {};
+                //console.log(result.testsuite.testcase[testCase]);
+                t.classname = result.testsuite.testcase[testCase]['$'].classname;
+                t.testname = result.testsuite.testcase[testCase]['$'].name;
+                t.failed = false;;
+                t.time = parseFloat(result.testsuite.testcase[testCase]['$'].time);
+                if(result.testsuite.testcase[testCase].hasOwnProperty("failure"))
+                {
+                    console.log("Failed Test Detected:", result.testsuite.testcase[testCase]['$'].name, result.testsuite.testcase[testCase]['$'].classname);
+                    t.failed = true;
+                    //map.set();.
+
+                }
+                //map.set(testCase.)
+
+                list.push(t);
+            }
+
+            
+        });
+        });
+
     }
-
-    var setReduced = new Set(reducedTests);
-
-
-    console.log( "passed {0}, failed {1}, reduced {2}".format(passedTests, failedTests.length, setReduced.size) );
 }
 
-mutationTesting();
-
-//test('markedMutation', function(t) {
-//
-//});
+list.sort(compare);
 
 
-if (!String.prototype.format) {
-  String.prototype.format = function() {
-    var args = arguments;
-    return this.replace(/{(\d+)}/g, function(match, number) { 
-      return typeof args[number] != 'undefined'
-        ? args[number]
-        : match
-      ;
-    });
-  };
-}
+console.log('Done');
+
+console.log(list);
