@@ -1,7 +1,7 @@
 var fs = require('fs'),
-    xml2js = require('xml2js'),
+    parser = require('xml2json'),
     child  = require('child_process'); 
-var parser = new xml2js.Parser();
+//var parser = new xml2js.Parser();
 
 var testReport =  '/simplecalc/target/surefire-reports/TEST-com.github.stokito.unitTestExample.calculator.CalculatorTest.xml';
 
@@ -46,9 +46,7 @@ catch(e)
 {
     //console.log(e);
 }
-    
 
-try{
 
 list = [];
 
@@ -60,13 +58,32 @@ filelist = walkSync(__dirname+'/target/surefire-reports',filelist);
 for( i=0; i < filelist.length; i++)
 {   
 //console.log("i: " + filelist[i])
-    if(filelist[i].endsWith('.xml'))
+    var filename = filelist[i];
+    if(filename.endsWith('.xml'))
     {
 
-	console.log("Reading File: ", filelist[i]);
-        fs.readFile(filelist[i], function(err, data) {
-        parser.parseString(data, function (err, result) {
-            //console.dir(result);
+	   console.log("Reading File: ", filename);
+       data = fs.readFileSync(filename).toString();
+       console.log("Reading File Content: ", data);
+       
+       var options = {
+            object: true,
+            reversible: false,
+            coerce: false,
+            sanitize: true,
+            trim: true,
+            arrayNotation: false,
+            alternateTextNode: false
+        };
+
+        result = parser.toJson(data, options);
+       console.log("Reading File Content Parsed: ", result);
+            
+
+            for(key in result)
+            {
+                console.log("Key: ", result[key]);
+            }
             //console.log(result.testsuite.testcase[0]);
             // Print out everything
             //console.dir(JSON.stringify(result,null, 3));
@@ -77,13 +94,13 @@ for( i=0; i < filelist.length; i++)
             {
                 var t = {};
                 //console.log(result.testsuite.testcase[testCase]);
-                t.classname = result.testsuite.testcase[testCase]['$'].classname;
-                t.testname = result.testsuite.testcase[testCase]['$'].name;
+                t.classname = result.testsuite.testcase[testCase].classname;
+                t.testname = result.testsuite.testcase[testCase].name;
                 t.failed = false;;
-                t.time = parseFloat(result.testsuite.testcase[testCase]['$'].time);
+                t.time = parseFloat(result.testsuite.testcase[testCase].time);
                 if(result.testsuite.testcase[testCase].hasOwnProperty("failure"))
                 {
-                    console.log("Failed Test Detected:", result.testsuite.testcase[testCase]['$'].name, result.testsuite.testcase[testCase]['$'].classname);
+                    console.log("Failed Test Detected:", result.testsuite.testcase[testCase].name, result.testsuite.testcase[testCase].classname);
                     t.failed = true;
                     //map.set();.
 
@@ -91,27 +108,19 @@ for( i=0; i < filelist.length; i++)
                 //map.set(testCase.)
 		//console.log("Pushing to List: ", t);
                 list.push(t);
+                console.log("Inner: ", Date.now());
 		//console.log("List length: ", list.length);
             }
-
-            
-        });
-        });
 
     }
 }
 
-//console.log("Comparing:");
 
-//list.sort(compare);
+console.log("Comparing:");
 
+list.sort(compare);
 
+console.log("Inner: ", Date.now());
 console.log('Done');
 
 console.log("List: ", list.length);
-
-
-}catch(e)
-{
-    console.log(e);
-}
