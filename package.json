@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "async": "^2.1.5",
+    "faker": "^4.1.0",
     "xml2js": "^0.4.17"
   }
 }

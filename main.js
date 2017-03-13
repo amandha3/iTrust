@@ -46,16 +46,7 @@ testResults = {};
 for(k=0; k<2; k++)
 {
    try{
-        //child.execSync('mvn test');
-    }
-    catch(e)
-    {
-        console.log(e);
-    }
-
-
-
-
+        child.execSync('mvn test');
 
     list = [];
 
@@ -156,6 +147,12 @@ for(k=0; k<2; k++)
     console.log('Done');
 
     console.log("List: ", list.length); 
+
+     }
+    catch(e)
+    {
+        console.log(e);
+    }
 }
 
 
