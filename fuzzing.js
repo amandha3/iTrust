@@ -32,7 +32,6 @@ var fuzzer =
         {
             // MUTATE IMPLEMENTATION HERE
 
-            val = val.replace('<','>');
 
             var array = val.split(' ');
 
@@ -56,8 +55,10 @@ var fuzzer =
 
             for(i=0; i<array.length; i++)
             {
-                if(array[i] == '<' && array[i] == ' ')
+                if(array[i] == '<' && array[i-1] == ' ')
+                {
                     array[i] = '>';
+                }
             }
 
             mergedCode =  array.join('');
