@@ -8,6 +8,10 @@ var test = require('tap').test,
     ;
 
 
+module.exports = {
+    mutateFile: mutateFile
+}
+
 String.prototype.replaceAll = function(search, replacement) {
     var target = this;
     return target.split(search).join(replacement);
@@ -52,7 +56,7 @@ var fuzzer =
 
             for(i=0; i<array.length; i++)
             {
-                if(array[i] == '<')
+                if(array[i] == '<' && array[i] == ' ')
                     array[i] = '>';
             }
 
@@ -65,9 +69,17 @@ var fuzzer =
 
 fuzzer.seed(10);
 
-var failedTests = [];
-var reducedTests = [];
-var passedTests = 0;
+function mutateFile(filename)
+{
+    console.log("Mutating File", filename);
+    var fileContent = fs.readFileSync(filename,'utf-8');
+    //var markDown = fs.readFileSync('simple.md','utf-8');
+
+    var mutuatedString = fuzzer.mutate.string(fileContent);
+    console.log("Mutated String: ", mutuatedString);
+
+    return mutuatedString;
+}
 
 function mutationTesting()
 {
@@ -80,7 +92,51 @@ function mutationTesting()
       
 }
 
-mutationTesting();
+
+function getRandomArbitrary(min, max) {
+  return Math.round(Math.random() * (max - min) + min);
+}
+
+var walkSync = function(dir, filelist) {
+            var path = path || require('path');
+            var fs = fs || require('fs'),
+                files = fs.readdirSync(dir);
+            filelist = filelist || [];
+            files.forEach(function(file) {
+                if (fs.statSync(path.join(dir, file)).isDirectory()) {
+                    filelist = walkSync(path.join(dir, file), filelist);
+                }
+                else {
+                    filelist.push(path.join(dir, file));
+                }
+            });
+            return filelist;
+        };
+
+
+
+
+
+filelist = [];
+
+filelist = walkSync(__dirname+'/src/main/edu/ncsu/csc/itrust',filelist);
+
+//fileIndex = getRandomArbitrary(0,filelist.length);
+
+fileIndex = 82;
+
+console.log("FileIndex: ", fileIndex);
+
+mutatedString = mutateFile(filelist[fileIndex]);
+
+console.log("FileName: ", filelist[fileIndex]);
+console.log("Mutated String". mutatedString);
+
+fs.writeFileSync(filelist[fileIndex], mutatedString, 'utf8');
+
+//mutationTesting();
+
+//mutationTesting();
 
 //test('markedMutation', function(t) {
 //
