@@ -5,6 +5,10 @@ var parser = new xml2js.Parser();
 
 var testReport =  '/simplecalc/target/surefire-reports/TEST-com.github.stokito.unitTestExample.calculator.CalculatorTest.xml';
 
+String.prototype.endsWith = function(suffix) {
+	return this.indexOf(suffix, this.length - suffix.length) !== -1;
+};
+
 var walkSync = function(dir, filelist) {
             var path = path || require('path');
             var fs = fs || require('fs'),
@@ -44,11 +48,14 @@ catch(e)
 }
     
 
-var list = [];
+try{
 
-filelist = []
+list = [];
+
+filelist = [];
 
 filelist = walkSync(__dirname+'/target/surefire-reports',filelist);
+
 
 for( i=0; i < filelist.length; i++)
 {   
@@ -56,10 +63,11 @@ for( i=0; i < filelist.length; i++)
     if(filelist[i].endsWith('.xml'))
     {
 
+	console.log("Reading File: ", filelist[i]);
         fs.readFile(filelist[i], function(err, data) {
         parser.parseString(data, function (err, result) {
-            console.dir(result);
-            console.log(result.testsuite.testcase[0]);
+            //console.dir(result);
+            //console.log(result.testsuite.testcase[0]);
             // Print out everything
             //console.dir(JSON.stringify(result,null, 3));
 
@@ -81,8 +89,9 @@ for( i=0; i < filelist.length; i++)
 
                 }
                 //map.set(testCase.)
-
+		//console.log("Pushing to List: ", t);
                 list.push(t);
+		//console.log("List length: ", list.length);
             }
 
             
@@ -92,9 +101,17 @@ for( i=0; i < filelist.length; i++)
     }
 }
 
-list.sort(compare);
+//console.log("Comparing:");
+
+//list.sort(compare);
 
 
 console.log('Done');
 
-console.log(list);
+console.log("List: ", list.length);
+
+
+}catch(e)
+{
+    console.log(e);
+}
