@@ -69,27 +69,34 @@ var fuzzer =
         {
             // MUTATE IMPLEMENTATION HERE
 
+            lines = val.split("\n");
 
-            var array = val.split(' ');
-
-            for(i=0; i< array.length; i++)
+            for(k=0; k<lines.length; k++)
             {
-                if(array[i].startsWith('"') && array[i].endsWith('"'))
+                var array = lines[k].split(' ');
+
+                for(i=0; i< array.length; i++)
                 {
-			array[i] = '"'+ faker.random.word() +'"';
+                    if(array[i].startsWith('"') && array[i].endsWith('"'))
+                    {
+                         array[i] = '"'+ faker.random.word() +'"';
+                    }
+                    else if(array[i].startsWith('"'))
+                    {
+                         array[i] = '"'+ faker.random.word();
+                    }
+                    else if(array[i].endsWith('"'))
+                    {
+                        array[i] = faker.random.word() +'"';
+                    }
                 }
-		else if(array[i].startsWith('"'))
-		{
-			 array[i] = '"'+ faker.random.word();
-		}
-		else if(array[i].endsWith('"'))
-		{
-			array[i] = faker.random.word() +'"';
-		}
+
+                var lines[k] = array.join(' ');
+
+
             }
 
-            var mergedCode = array.join(' ');
-
+            mergedCode = lines.join("\n");
 
             array = mergedCode.split('');
 
@@ -101,8 +108,9 @@ var fuzzer =
                 }
             }
 
-            mergedCode =  array.join('');
+            mergedCode = array.join('');
 
+                
             return mergedCode;
         }
     }
