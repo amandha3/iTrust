@@ -1,9 +1,9 @@
 var fs = require('fs'),
     parser = require('xml2json'),
     child  = require('child_process'); 
+    fuzzing = require("./fuzzing.js");
 //var parser = new xml2js.Parser();
 
-var testReport =  '/simplecalc/target/surefire-reports/TEST-com.github.stokito.unitTestExample.calculator.CalculatorTest.xml';
 
 String.prototype.endsWith = function(suffix) {
 	return this.indexOf(suffix, this.length - suffix.length) !== -1;
@@ -46,6 +46,8 @@ testResults = {};
 for(k=0; k<2; k++)
 {
    try{
+
+        fuzzing.mutateAFile();
         child.execSync('mvn test');
 
     list = [];

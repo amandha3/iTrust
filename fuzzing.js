@@ -8,9 +8,9 @@ var test = require('tap').test,
     ;
 
 
-module.exports = {
-    mutateFile: mutateFile
-}
+var exports = module.exports = {};
+
+
 
 String.prototype.replaceAll = function(search, replacement) {
     var target = this;
@@ -116,24 +116,27 @@ var walkSync = function(dir, filelist) {
 
 
 
+exports.mutateAFile = function() {
+    filelist = [];
+
+    filelist = walkSync(__dirname+'/src/main/edu/ncsu/csc/itrust',filelist);
+
+    //fileIndex = getRandomArbitrary(0,filelist.length);
+
+    fileIndex = 82;
+
+    console.log("FileIndex: ", fileIndex);
+
+    mutatedString = mutateFile(filelist[fileIndex]);
+
+    console.log("FileName: ", filelist[fileIndex]);
+    console.log("Mutated String". mutatedString);
+
+    fs.writeFileSync(filelist[fileIndex], mutatedString, 'utf8');
+};
 
 
-filelist = [];
 
-filelist = walkSync(__dirname+'/src/main/edu/ncsu/csc/itrust',filelist);
-
-//fileIndex = getRandomArbitrary(0,filelist.length);
-
-fileIndex = 82;
-
-console.log("FileIndex: ", fileIndex);
-
-mutatedString = mutateFile(filelist[fileIndex]);
-
-console.log("FileName: ", filelist[fileIndex]);
-console.log("Mutated String". mutatedString);
-
-fs.writeFileSync(filelist[fileIndex], mutatedString, 'utf8');
 
 //mutationTesting();
 
