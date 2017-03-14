@@ -226,6 +226,7 @@ for(k=0; k<1; k++)
         }
         
         console.log("After Exec Sync");
+
     list = [];
 
     filelist = [];
@@ -317,6 +318,8 @@ for(k=0; k<1; k++)
         }
     }
 
+    var s = JSON.stringify(testResults);
+    fs.writeFileSync("testResults", testResults, 'utf8');
 
     console.log("Comparing:");
 
