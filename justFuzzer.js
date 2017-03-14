@@ -77,7 +77,7 @@ var fuzzer =
 
                 for(i=0; i< array.length; i++)
                 {
-                    if(array[i].startsWith('"') && array[i].endsWith('"'))
+                    if(array[i].startsWith('"') && array[i].endsWith('"') && array[i].length > 1)
                     {
                          array[i] = '"'+ faker.random.word() +'"';
                     }
