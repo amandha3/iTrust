@@ -6,9 +6,6 @@ var fs = require('fs'),
 
 var shell = require('shelljs');
 
-const mvn = require('maven').create({
-      cwd: '/home/vagrant/development/iTrust'
-    });
 
 var cp = require('child_process');
 //var parser = new xml2js.Parser();
