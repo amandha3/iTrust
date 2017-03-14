@@ -1,6 +1,10 @@
 var fs = require('fs'),
     parser = require('xml2json'),
     child  = require('child_process');
+
+var deasync = require('deasync');
+var cp = require('child_process');
+var exec = deasync(cp.exec);
 //var parser = new xml2js.Parser();
 
 
@@ -207,13 +211,13 @@ if (!String.prototype.format) {
 testResults = {};
 
 
-for(k=0; k<2; k++)
+for(k=0; k<1; k++)
 {
    try{
 
         mutateAFile();
         console.log("Before Exec Sync");
-        //child.execSync('mvn test');
+        exec('mvn test');
         console.log("After Exec Sync");
     list = [];
 
