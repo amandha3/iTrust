@@ -4,9 +4,13 @@ var fs = require('fs'),
     Random = require('random-js'),
     faker = require("faker");
 
-var deasync = require('deasync');
+var shell = require('shelljs');
+
+const mvn = require('maven').create({
+      cwd: '/home/vagrant/development/iTrust'
+    });
+
 var cp = require('child_process');
-var exec = deasync(cp.exec);
 //var parser = new xml2js.Parser();
 
 
@@ -79,7 +83,8 @@ var fuzzer =
                     if(array[i].indexOf('"', fIndex+1) != -1)
                     {
                         sIndex = array[i].indexOf('"', fIndex+1);
-                        array[i] = array[i].substring(0,fIndex+1)+faker.random.word()+array[i].substring(sIndex);
+			if((fIndex-1 > 0 && array[i].charAt(fIndex-1) != '+') && (sIndex+1 < array[i].length && array[i].charAt(sIndex+1) != '+'))
+                        	array[i] = array[i].substring(0,fIndex+1)+faker.random.word()+array[i].substring(sIndex);
                     }
                 }
             }
@@ -157,16 +162,17 @@ mutateAFile = function() {
 
     filelist = walkSync(__dirname+'/src/main/edu/ncsu/csc/itrust',filelist);
 
-    //fileIndex = getRandomArbitrary(0,filelist.length);
+    fileIndex = getRandomArbitrary(0,filelist.length);
 
-    fileIndex = 82;
+    //fileIndex = 82;
 
     console.log("FileIndex: ", fileIndex);
 
     mutatedString = mutateFile(filelist[fileIndex]);
 
     console.log("FileName: ", filelist[fileIndex]);
-    console.log("Mutated String". mutatedString);
+    console.log("Mutated String");
+    console.log(mutatedString);
 
     fs.writeFileSync(filelist[fileIndex], mutatedString, 'utf8');
 };
@@ -213,18 +219,21 @@ if (!String.prototype.format) {
 testResults = {};
 
 
-for(k=0; k<1; k++)
+for(k=0; k<5; k++)
 {
    try{
 
         mutateAFile();
         console.log("Before Exec Sync");
         try{
-            exec('mvn test');    
+          shell.exec('mvn test');
+	  //mvn.execute(['test'],{silent: true});    
         }
         catch(e)
         {
             console.log(e);
+	    console.log("Yup! Error in MVN");
+            process.exit(1);
         }
         
         console.log("After Exec Sync");
@@ -236,6 +245,7 @@ for(k=0; k<1; k++)
     filelist = walkSync(__dirname+'/target/surefire-reports',filelist);
 
     console.log("FileList: ", filelist);
+
 
     for( i=0; i < filelist.length; i++)
     {   
@@ -321,7 +331,7 @@ for(k=0; k<1; k++)
     }
 
     var s = JSON.stringify(testResults);
-    fs.writeFileSync("testResults", testResults, 'utf8');
+    fs.writeFileSync("testResults", s, 'utf8');
 
     console.log("Comparing:");
 
