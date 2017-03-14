@@ -1,6 +1,8 @@
 var fs = require('fs'),
     parser = require('xml2json'),
-    child  = require('child_process');
+    child  = require('child_process'),
+    Random = require('random-js'),
+    faker = require("faker");
 
 var deasync = require('deasync');
 var cp = require('child_process');
