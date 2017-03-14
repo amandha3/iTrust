@@ -6,9 +6,6 @@ var fs = require('fs'),
 
 var shell = require('shelljs');
 
-const mvn = require('maven').create({
-      cwd: '/home/vagrant/development/iTrust'
-    });
 
 var cp = require('child_process');
 //var parser = new xml2js.Parser();
@@ -83,7 +80,7 @@ var fuzzer =
                     if(array[i].indexOf('"', fIndex+1) != -1)
                     {
                         sIndex = array[i].indexOf('"', fIndex+1);
-			if((fIndex-1 > 0 && array[i].charAt(fIndex-1) != '+') && (sIndex+1 < array[i].length && array[i].charAt(sIndex+1) != '+'))
+			if((fIndex-1 > 0 && array[i].charAt(fIndex-1) != '+') && (sIndex+1 < array[i].length && array[i].charAt(sIndex+1) != '+') && array[i].substring(fIndex+1, sIndex).indexOf(' ') == -1)
                         	array[i] = array[i].substring(0,fIndex+1)+faker.random.word()+array[i].substring(sIndex);
                     }
                 }
@@ -218,7 +215,7 @@ if (!String.prototype.format) {
 
 testResults = {};
 
-loopCount = 10;
+loopCount = 100;
 
 testResults.loopCount = loopCount;
 
@@ -227,7 +224,8 @@ for(k=0; k<loopCount; k++)
 {
    try{
 
-        mutateAFile();
+	for(p=0; p<10; p++)
+          mutateAFile();
         console.log("Before Exec Sync");
         try{
           shell.exec('mvn test');
