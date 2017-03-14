@@ -218,8 +218,12 @@ if (!String.prototype.format) {
 
 testResults = {};
 
+loopCount = 10;
 
-for(k=0; k<5; k++)
+testResults.loopCount = loopCount;
+
+
+for(k=0; k<loopCount; k++)
 {
    try{
 
