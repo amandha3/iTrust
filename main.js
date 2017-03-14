@@ -217,7 +217,14 @@ for(k=0; k<1; k++)
 
         mutateAFile();
         console.log("Before Exec Sync");
-        exec('mvn test');
+        try{
+            exec('mvn test');    
+        }
+        catch(e)
+        {
+            console.log(e);
+        }
+        
         console.log("After Exec Sync");
     list = [];
 
