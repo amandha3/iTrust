@@ -223,8 +223,9 @@ testResults.loopCount = loopCount;
 for(k=0; k<loopCount; k++)
 {
    try{
-
-        mutateAFile();
+	shell.exec('git checkout test-branch');
+	for(p=0; p<5; p++)
+          mutateAFile();
         console.log("Before Exec Sync");
         try{
 	  shell.exec('git config --global user.email "fuzzer@fuzz.com"');
