@@ -81,17 +81,9 @@ var fuzzer =
                     {
                          array[i] = '"'+ faker.random.word() +'"';
                     }
-                    else if(array[i].startsWith('"'))
-                    {
-                         array[i] = '"'+ faker.random.word();
-                    }
-                    else if(array[i].endsWith('"'))
-                    {
-                        array[i] = faker.random.word() +'"';
-                    }
                 }
 
-                var lines[k] = array.join(' ');
+                lines[k] = array.join(' ');
 
 
             }
@@ -116,7 +108,6 @@ var fuzzer =
     }
 };
 
-fuzzer.seed(10);
 
 function mutateFile(filename)
 {
