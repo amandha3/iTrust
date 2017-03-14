@@ -1,7 +1,7 @@
 ***************************************************
 *******************TEST CASE REPORT***************
 ***************************************************
-Useless Test Cases - Count:  1095
+Useless Test Cases - Count:  1101
 ClassName:TestName -  edu.ncsu.csc.itrust.logger.TransactionLoggerTest:testLogTransaction
 ClassName:TestName -  edu.ncsu.csc.itrust.logger.TransactionLoggerTest:testGetInstance
 ClassName:TestName -  edu.ncsu.csc.itrust.unit.BeanBuilderTest:testEmptyPatientDateOfBirth
@@ -32,6 +32,7 @@ ClassName:TestName -  edu.ncsu.csc.itrust.unit.action.AddApptActionTest:testAddA
 ClassName:TestName -  edu.ncsu.csc.itrust.unit.action.AddApptActionTest:testAddAppt2
 ClassName:TestName -  edu.ncsu.csc.itrust.unit.action.AddApptActionTest:testGetName
 ClassName:TestName -  edu.ncsu.csc.itrust.unit.action.AddApptActionTest:testAddConflicts
+ClassName:TestName -  edu.ncsu.csc.itrust.unit.action.AddApptActionTest:testGetConflicts
 ClassName:TestName -  edu.ncsu.csc.itrust.unit.action.AddApptRequestActionTest:testAddApptRequest
 ClassName:TestName -  edu.ncsu.csc.itrust.unit.action.AddApptRequestActionTest:testGetNextAvailableAppts
 ClassName:TestName -  edu.ncsu.csc.itrust.unit.action.AddDrugListActionTest:testLoadFile
@@ -126,6 +127,7 @@ ClassName:TestName -  edu.ncsu.csc.itrust.unit.action.GetUserNameActionTest:test
 ClassName:TestName -  edu.ncsu.csc.itrust.unit.action.GetUserNameActionTest:testCorrectFormat
 ClassName:TestName -  edu.ncsu.csc.itrust.unit.action.GroupReportActionTest:testGetComprehensiveMedicalInfo
 ClassName:TestName -  edu.ncsu.csc.itrust.unit.action.GroupReportActionTest:testGenerateReport
+ClassName:TestName -  edu.ncsu.csc.itrust.unit.action.GroupReportActionTest:testGetComprehensiveDemographicInfo
 ClassName:TestName -  edu.ncsu.csc.itrust.unit.action.GroupReportGeneratorActionTest:testParseFilters
 ClassName:TestName -  edu.ncsu.csc.itrust.unit.action.GroupReportGeneratorActionTest:testGenerateReport
 ClassName:TestName -  edu.ncsu.csc.itrust.unit.action.LoginFailureActionTest:testSetCaptcha
@@ -583,8 +585,10 @@ ClassName:TestName -  edu.ncsu.csc.itrust.unit.dao.patient.DeclareHCPTest:testDe
 ClassName:TestName -  edu.ncsu.csc.itrust.unit.dao.patient.DeclareHCPTest:testUnDeclareNotDeclaredHCP
 ClassName:TestName -  edu.ncsu.csc.itrust.unit.dao.patient.DeclareHCPTest:testCheckDeclared
 ClassName:TestName -  edu.ncsu.csc.itrust.unit.dao.patient.DeclareHCPTest:testUnDeclareHCP
+ClassName:TestName -  edu.ncsu.csc.itrust.unit.dao.patient.EditPatientTest:testGetPatient2
 ClassName:TestName -  edu.ncsu.csc.itrust.unit.dao.patient.EditPatientTest:testGetEmpty
 ClassName:TestName -  edu.ncsu.csc.itrust.unit.dao.patient.EditPatientTest:testRemoveAllRepresented
+ClassName:TestName -  edu.ncsu.csc.itrust.unit.dao.patient.EditPatientTest:testEditPatient2
 ClassName:TestName -  edu.ncsu.csc.itrust.unit.dao.patient.PatientDAOExceptionTest:testUndeclareHCPException
 ClassName:TestName -  edu.ncsu.csc.itrust.unit.dao.patient.PatientDAOExceptionTest:testCheckDeclaredHCPException
 ClassName:TestName -  edu.ncsu.csc.itrust.unit.dao.patient.PatientDAOExceptionTest:testGetDeclaredHCPsException
@@ -902,6 +906,7 @@ ClassName:TestName -  edu.ncsu.csc.itrust.unit.report.DemographicReportFilterTes
 ClassName:TestName -  edu.ncsu.csc.itrust.unit.report.DemographicReportFilterTest:testFilterByICPhone
 ClassName:TestName -  edu.ncsu.csc.itrust.unit.report.DemographicReportFilterTest:testFilterByICState
 ClassName:TestName -  edu.ncsu.csc.itrust.unit.report.DemographicReportFilterTest:testFilterByLastName
+ClassName:TestName -  edu.ncsu.csc.itrust.unit.report.DemographicReportFilterTest:testFilterByGender
 ClassName:TestName -  edu.ncsu.csc.itrust.unit.report.DemographicReportFilterTest:testFilterByPhoneNoResult
 ClassName:TestName -  edu.ncsu.csc.itrust.unit.report.DemographicReportFilterTest:testFilterByICCity
 ClassName:TestName -  edu.ncsu.csc.itrust.unit.report.DemographicReportFilterTest:testFilterByICName
@@ -980,6 +985,7 @@ ClassName:TestName -  edu.ncsu.csc.itrust.unit.validate.BeanValidatorTest:testCh
 ClassName:TestName -  edu.ncsu.csc.itrust.unit.validate.BeanValidatorTest:testCheckFormatStringStringValidationFormatBoolean
 ClassName:TestName -  edu.ncsu.csc.itrust.unit.validate.BeanValidatorTest:testCheckIsNullableEmpty
 ClassName:TestName -  edu.ncsu.csc.itrust.unit.validate.BeanValidatorTest:testCheckDouble
+ClassName:TestName -  edu.ncsu.csc.itrust.unit.validate.BeanValidatorTest:testCheckGender
 ClassName:TestName -  edu.ncsu.csc.itrust.unit.validate.BeanValidatorTest:testCheckGenderNull
 ClassName:TestName -  edu.ncsu.csc.itrust.unit.validate.BeanValidatorTest:testCheckLongValues
 ClassName:TestName -  edu.ncsu.csc.itrust.unit.validate.BeanValidatorTest:testDoubleValues
@@ -1097,11 +1103,5 @@ ClassName:TestName -  edu.ncsu.csc.itrust.unit.webutils.SessionUtilsTest:testGet
 ClassName:TestName -  edu.ncsu.csc.itrust.unit.webutils.SessionUtilsTest:testGetCurrentPatientMIDLong
 ClassName:TestName -  edu.ncsu.csc.itrust.unit.webutils.SessionUtilsTest:testGetSessionLoggedInMID
 ClassName:TestName -  edu.ncsu.csc.itrust.unit.webutils.SessionUtilsTest:testGetInstance
-Useful Test Cases - Count:  7
+Useful Test Cases - Count:  1
 ClassName:TestName -  undefined:undefined
-ClassName:TestName -  edu.ncsu.csc.itrust.unit.action.AddApptActionTest:testGetConflicts
-ClassName:TestName -  edu.ncsu.csc.itrust.unit.action.GroupReportActionTest:testGetComprehensiveDemographicInfo
-ClassName:TestName -  edu.ncsu.csc.itrust.unit.dao.patient.EditPatientTest:testGetPatient2
-ClassName:TestName -  edu.ncsu.csc.itrust.unit.dao.patient.EditPatientTest:testEditPatient2
-ClassName:TestName -  edu.ncsu.csc.itrust.unit.report.DemographicReportFilterTest:testFilterByGender
-ClassName:TestName -  edu.ncsu.csc.itrust.unit.validate.BeanValidatorTest:testCheckGender

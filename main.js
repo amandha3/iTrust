@@ -74,16 +74,18 @@ var fuzzer =
 
             for(i=0; i< array.length; i++)
             {
-                if(array[i].indexOf('"') != -1)
+                if(array[i].startsWith('"') && array[i].endsWith('"'))
                 {
-                    var fIndex = array[i].indexOf('"');
-                    if(array[i].indexOf('"', fIndex+1) != -1)
-                    {
-                        sIndex = array[i].indexOf('"', fIndex+1);
-			if((fIndex-1 > 0 && array[i].charAt(fIndex-1) != '+') && (sIndex+1 < array[i].length && array[i].charAt(sIndex+1) != '+') && array[i].substring(fIndex+1, sIndex).indexOf(' ') == -1)
-                        	array[i] = array[i].substring(0,fIndex+1)+faker.random.word()+array[i].substring(sIndex);
-                    }
+			array[i] = '"'+ faker.random.word() +'"';
                 }
+		else if(array[i].startsWith('"'))
+		{
+			 array[i] = '"'+ faker.random.word();
+		}
+		else if(array[i].endsWith('"'))
+		{
+			array[i] = faker.random.word() +'"';
+		}
             }
 
             var mergedCode = array.join(' ');
