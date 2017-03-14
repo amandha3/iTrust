@@ -1,0 +1,54 @@
+[1mdiff --git a/main.js b/main.js[m
+[1mindex f0cedda..0e32673 100644[m
+[1m--- a/main.js[m
+[1m+++ b/main.js[m
+[36m@@ -1,6 +1,8 @@[m
+ var fs = require('fs'),[m
+     parser = require('xml2json'),[m
+[31m-    child  = require('child_process');[m
+[32m+[m[32m    child  = require('child_process'),[m
+[32m+[m[32m    faker = require("faker"),[m
+[32m+[m[32m    Random = require('random-js');[m
+ //var parser = new xml2js.Parser();[m
+ [m
+ [m
+[36m@@ -160,7 +162,7 @@[m [mmutateAFile = function() {[m
+     mutatedString = mutateFile(filelist[fileIndex]);[m
+ [m
+     console.log("FileName: ", filelist[fileIndex]);[m
+[31m-    console.log("Mutated String". mutatedString);[m
+[32m+[m[32m    console.log("Mutated String2". mutatedString);[m
+ [m
+     fs.writeFileSync(filelist[fileIndex], mutatedString, 'utf8');[m
+ };[m
+[36m@@ -213,7 +215,7 @@[m [mfor(k=0; k<2; k++)[m
+ [m
+         mutateAFile();[m
+         console.log("Before Exec Sync");[m
+[31m-        //child.execSync('mvn test');[m
+[32m+[m[32m        child.execSync('mvn test');[m
+         console.log("After Exec Sync");[m
+     list = [];[m
+ [m
+[1mdiff --git a/src/main/edu/ncsu/csc/itrust/controller/hospital/HospitalController.java b/src/main/edu/ncsu/csc/itrust/controller/hospital/HospitalController.java[m
+[1mindex 197fa24..228aeb6 100644[m
+[1m--- a/src/main/edu/ncsu/csc/itrust/controller/hospital/HospitalController.java[m
+[1m+++ b/src/main/edu/ncsu/csc/itrust/controller/hospital/HospitalController.java[m
+[36m@@ -12,7 +12,7 @@[m [mimport edu.ncsu.csc.itrust.model.hospital.Hospital;[m
+ import edu.ncsu.csc.itrust.model.hospital.HospitalData;[m
+ import edu.ncsu.csc.itrust.model.hospital.HospitalMySQLConverter;[m
+ [m
+[31m-@ManagedBean(name="hospital_controller")[m
+[32m+[m[32m@ManagedBean(name="Libyan Arab Jamahiriya")[m
+ public class HospitalController {[m
+ 	private static HospitalData hospitalData;[m
+ 	public HospitalController() throws DBException{[m
+[36m@@ -42,7 +42,7 @@[m [mpublic class HospitalController {[m
+ 		} catch (Exception e) {[m
+ 			FacesMessage throwMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid Location Information", "Invalid Location Information");[m
+ 	        FacesContext.getCurrentInstance().addMessage(null,throwMsg);[m
+[31m-	        return "";[m
+[32m+[m	[32m        return "Savings Account";[m
+ [m
+ 		}[m
+ 	}[m

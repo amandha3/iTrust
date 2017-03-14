@@ -6,8 +6,10 @@ obj = JSON.parse(string);
 
 loopCount = obj.loopCount;
 
+
 usefulTest = [];
 uselessTest = [];
+
 
 
 for(var name in obj)
@@ -15,7 +17,7 @@ for(var name in obj)
 	if(name == 'loopCount')
 		continue;
 
-	if(obj.name.success == loopCount || obj.name.failure == loopCount)
+	if(obj[name].success == loopCount || obj[name].failure == loopCount)
 		uselessTest.push(name);
 	else
 		usefulTest.push(name);
