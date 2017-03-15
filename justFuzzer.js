@@ -220,8 +220,10 @@ for(k=0; k<1; k++)
 {
    try{
 	shell.exec('git checkout test-branch');
-	for(p=0; p<5; p++)
+	for(p=0; p<10; p++)
+	{
           mutateAFile();
+	}
         console.log("Before Exec Sync");
         try{
 	  shell.exec('git config --global user.email "fuzzer@fuzz.com"');
