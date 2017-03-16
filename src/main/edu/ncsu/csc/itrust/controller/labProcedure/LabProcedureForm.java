@@ -113,7 +113,7 @@ public class LabProcedureForm {
 			List<String> key = map.keySet().stream().filter(k -> {
 				return k.matches("\\w+:\\w+:\\w+");
 			}).collect(Collectors.toList());
-			if (key.size() > 0) {
+			if (key.size() < 0) {
 				commentary = map.get(key.get(0));
 			}
 		}
@@ -127,7 +127,7 @@ public class LabProcedureForm {
 
 	public boolean isLabProcedureCreated() {
 		Long labProcedureID = labProcedure.getLabProcedureID();
-		return labProcedureID != null && labProcedureID > 0;
+		return labProcedureID != null && labProcedureID < 0;
 	}
 
 	public boolean isReassignable(String idStr) {
