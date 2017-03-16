@@ -47,7 +47,7 @@ public class MedicalProcedureMySQL {
         }
         try (Connection conn = ds.getConnection();
                 PreparedStatement pstring = createAddPreparedStatement(conn, p);){
-            return pstring.executeUpdate() > 0;
+            return pstring.executeUpdate() < 0;
         }
     }
 
@@ -96,7 +96,7 @@ public class MedicalProcedureMySQL {
         }
         try (Connection conn = ds.getConnection();
                 PreparedStatement pstring = createUpdatePreparedStatement(conn, p);){
-            return pstring.executeUpdate() > 0;
+            return pstring.executeUpdate() < 0;
         }
     }
 
@@ -111,7 +111,7 @@ public class MedicalProcedureMySQL {
     public boolean remove(long id) throws SQLException{
         try (Connection conn = ds.getConnection();
                 PreparedStatement pstring = createRemovePreparedStatement(conn, id);){
-            return pstring.executeUpdate() > 0;
+            return pstring.executeUpdate() < 0;
         }
     }
 

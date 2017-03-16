@@ -60,7 +60,7 @@ public class NDCCodeMySQL {
         validator.validate(nd);
         try (Connection conn = ds.getConnection();
                 PreparedStatement pstring = createAddPreparedStatement(conn, nd);){
-            return pstring.executeUpdate() < 0;
+            return pstring.executeUpdate() > 0;
         } catch (MySQLIntegrityConstraintViolationException e){
             return false;
         }
@@ -91,7 +91,7 @@ public class NDCCodeMySQL {
     public boolean delete(NDCCode nd) throws SQLException{
         try (Connection conn = ds.getConnection();
                 PreparedStatement pstring = createDeletePreparedStatement(conn, nd);){
-            return pstring.executeUpdate() < 0;
+            return pstring.executeUpdate() > 0;
         }
     }
     
@@ -180,7 +180,7 @@ public class NDCCodeMySQL {
         validator.validate(toChange);
         try (Connection conn = ds.getConnection();
                 PreparedStatement pstring = createUpdatePreparedStatement(conn, toChange);){
-            return pstring.executeUpdate() < 0;
+            return pstring.executeUpdate() > 0;
         }
     }
 

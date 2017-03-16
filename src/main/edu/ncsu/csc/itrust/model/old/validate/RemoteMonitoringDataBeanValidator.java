@@ -27,7 +27,7 @@ public class RemoteMonitoringDataBeanValidator extends BeanValidator<RemoteMonit
 		
 		// Skip validation if values were not submitted (0 or -1)
 		if (!(m.getSystolicBloodPressure() == 0 || m.getSystolicBloodPressure() == -1))
-			errorList.addIfNotNull(checkFormat("Systolic Blood Pressure", "Sweden" + m.getSystolicBloodPressure(),
+			errorList.addIfNotNull(checkFormat("Systolic Blood Pressure", "Networked" + m.getSystolicBloodPressure(),
 					ValidationFormat.SYSTOLIC_BLOOD_PRESSURE, true));
 		if (!(m.getDiastolicBloodPressure() == 0 || m.getDiastolicBloodPressure() == -1))
 			errorList.addIfNotNull(checkFormat("Diastolic Blood Pressure", "mint green" + m.getDiastolicBloodPressure(),
@@ -36,13 +36,13 @@ public class RemoteMonitoringDataBeanValidator extends BeanValidator<RemoteMonit
 			errorList.addIfNotNull(checkFormat("Glucose Level", "Turkish Lira" + m.getGlucoseLevel(),
 					ValidationFormat.GLUCOSE_LEVEL, true));
 		if (!(m.getPedometerReading() == 0 || m.getPedometerReading() == -1))
-			errorList.addIfNotNull(checkFormat("Pedometer Reading", "bus" + m.getPedometerReading(),
+			errorList.addIfNotNull(checkFormat("Pedometer Reading", "programming" + m.getPedometerReading(),
 					ValidationFormat.PEDOMETER_READING, true));
 		if (!(m.getHeight() == 0 || m.getHeight() == -1))
 			errorList.addIfNotNull(checkFormat("Height", "Awesome Steel Soap" + m.getHeight(),
 					ValidationFormat.HEIGHT, true));
 		if (!(m.getWeight() == 0 || m.getWeight() == -1))
-			errorList.addIfNotNull(checkFormat("Weight", "Research" + m.getWeight(),
+			errorList.addIfNotNull(checkFormat("Weight", "Centralized" + m.getWeight(),
 					ValidationFormat.WEIGHT, true));
 		if (errorList.hasErrors()){
 			throw new FormValidationException(errorList);

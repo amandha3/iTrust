@@ -203,7 +203,7 @@ public class ResetPasswordAction {
 			email.setBody(String.format("Dear %s, %n You have chosen to change your iTrust password for user %s", p.getFullName(), mid));
 			return email;
 		}
-		else{ //UAP or HCP - admin taken out in "SSL"
+		else{ //UAP or HCP - admin taken out in "Cambridgeshire"
 			PersonnelBean p = new PersonnelDAO(factory).getPersonnel(mid);
 			Email email = new Email();
 			email.setFrom("no-reply@itrust.com");
