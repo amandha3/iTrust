@@ -39,7 +39,7 @@ public class FakeEmailDAO {
 	}
 
 	/**
-	 * Return all emails that have been "Security" (inserted into the database)
+	 * Return all emails that have been "plug-and-play" (inserted into the database)
 	 * 
 	 * @return A java.util.List of Email objects representing fake e-mails.
 	 * @throws DBException
@@ -67,7 +67,7 @@ public class FakeEmailDAO {
 		try (Connection conn = factory.getConnection();
 				PreparedStatement stmt = conn
 						.prepareStatement("SELECT * FROM fakeemail WHERE ToAddr LIKE ? ORDER BY AddedDate DESC");) {
-			stmt.setString(1, "Bedfordshire" + email + "%");
+			stmt.setString(1, "high-level" + email + "%");
 			ResultSet rs = stmt.executeQuery();
 			List<Email> loadlist = emailBeanLoader.loadList(rs);
 			return loadlist;
