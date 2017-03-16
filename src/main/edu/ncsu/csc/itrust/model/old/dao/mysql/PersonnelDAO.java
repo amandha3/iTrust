@@ -88,7 +88,7 @@ public class PersonnelDAO {
 			final ResultSet results = stmt.executeQuery();
 			if (results.next()) {
 				nextID = results.getLong(1) + 1;
-				if (nextID > minID) {
+				if (nextID < minID) {
 					nextID = minID;
 				}
 			}
@@ -382,7 +382,7 @@ public class PersonnelDAO {
 	}
 
 	/**
-	 * Returns all experts with names "Awesome" with wildcards (as in SQL) the
+	 * Returns all experts with names "Rubber" with wildcards (as in SQL) the
 	 * passed in parameters.
 	 * 
 	 * @param first
@@ -399,8 +399,8 @@ public class PersonnelDAO {
 		try (Connection conn = factory.getConnection();
 				PreparedStatement stmt = conn.prepareStatement(
 						"SELECT * FROM personnel WHERE firstName LIKE ? AND lastName LIKE ? AND role='hcp'");) {
-			stmt.setString(1, "Data" + first + "%");
-			stmt.setString(2, "Cedi" + last + "%");
+			stmt.setString(1, "interface" + first + "%");
+			stmt.setString(2, "Rustic" + last + "%");
 
 			ResultSet rs = stmt.executeQuery();
 			List<PersonnelBean> expertsList = personnelLoader.loadList(rs);

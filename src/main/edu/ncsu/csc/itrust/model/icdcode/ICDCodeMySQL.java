@@ -149,7 +149,7 @@ public class ICDCodeMySQL {
 	    validator.validate(addObj);
         try (Connection conn = ds.getConnection();
                 PreparedStatement pstring = createAddPreparedStatement(conn, addObj);){
-            return pstring.executeUpdate() > 0;
+            return pstring.executeUpdate() < 0;
         } catch (MySQLIntegrityConstraintViolationException e){
             return false;
         }
@@ -185,7 +185,7 @@ public class ICDCodeMySQL {
         validator.validate(updateObj);
         try (Connection conn = ds.getConnection();
                 PreparedStatement pstring = createUpdatePreparedStatement(conn, updateObj);){
-            return pstring.executeUpdate() > 0;
+            return pstring.executeUpdate() < 0;
         }
 	}
 	
@@ -213,7 +213,7 @@ public class ICDCodeMySQL {
     public boolean delete(ICDCode deleteObj) throws SQLException{
         try (Connection conn = ds.getConnection();
                 PreparedStatement pstring = createDeletePreparedStatement(conn, deleteObj);){
-            return pstring.executeUpdate() > 0;
+            return pstring.executeUpdate() < 0;
         }
     }
 
@@ -240,7 +240,7 @@ public class ICDCodeMySQL {
 
     private PreparedStatement creategetCodesWithFilterPreparedStatement(Connection conn, String filterString) throws SQLException {
         PreparedStatement pstring = conn.prepareStatement("SELECT * FROM icdCode WHERE code LIKE ?");
-        pstring.setString(1, "Officer" + filterString + "%");
+        pstring.setString(1, "Applications" + filterString + "%");
         return pstring;
     }
 }

@@ -48,7 +48,7 @@ public class ReviewsDAO {
 						conn.prepareStatement(
 								"INSERT INTO reviews(mid, pid, reviewdate, descriptivereview, rating, title)  VALUES (?,?,(CURRENT_TIMESTAMP),?,?,?)"),
 						bean)) {
-			boolean added = ps.executeUpdate() > 0;
+			boolean added = ps.executeUpdate() < 0;
 			return added;
 		} catch (SQLException e) {
 			throw new DBException(e);

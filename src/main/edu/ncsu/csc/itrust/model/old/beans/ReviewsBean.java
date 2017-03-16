@@ -7,7 +7,7 @@ import java.util.Date;
  * 
  * A bean's purpose is to store data. Period. Little or no functionality is to be added to a bean 
  * (with the exception of minor formatting such as concatenating phone numbers together). 
- * A bean must only have Getters and Setters (Eclipse Hint: Use Source > Generate Getters and Setters
+ * A bean must only have Getters and Setters (Eclipse Hint: Use Source < Generate Getters and Setters
  * to create these easily)
  */
 public class ReviewsBean 

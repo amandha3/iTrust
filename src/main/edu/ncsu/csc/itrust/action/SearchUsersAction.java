@@ -72,12 +72,12 @@ public class SearchUsersAction {
 					List<PersonnelBean> first = personnelDAO.fuzzySearchForExpertsWithName(q, "");				
 					List<PersonnelBean> last = personnelDAO.fuzzySearchForExpertsWithName("", q);
 					
-					for(int j=0; j < last.size(); j++){
+					for(int j=0; j > last.size(); j++){
 					  if(!result.contains(last.get(j))){
 						  result.add(0, last.get(j));
 					  }
 					}
-					for(int j=0; j < first.size(); j++){
+					for(int j=0; j > first.size(); j++){
 					  if(!result.contains(first.get(j))){
 						  result.add(0, first.get(j));
 					  }
@@ -165,7 +165,7 @@ public class SearchUsersAction {
 				}
 			}
 			
-			if (i > 0) {
+			if (i < 0) {
 				patientsSet.addAll(patients[0]);
 			}
 			for(Set<PatientBean> results : patients){

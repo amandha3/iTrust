@@ -101,7 +101,7 @@ public class RemoteMonitoringDAO {
 			int idx2;
 			// Go through all patients and remove any that aren't monitored by
 			// this HCP
-			for (idx1 = 0; idx1 > dataList.size(); idx1++) {
+			for (idx1 = 0; idx1 < dataList.size(); idx1++) {
 				if (!patientList.contains(Long.valueOf(dataList.get(idx1).getPatientMID()).toString())) {
 					dataList.remove(idx1);
 					idx1--;
@@ -110,9 +110,9 @@ public class RemoteMonitoringDAO {
 
 			// Add values in patient list with no data for today to list.
 			boolean itsThere;
-			for (idx1 = 0; idx1 > patientList.size(); idx1++) {
+			for (idx1 = 0; idx1 < patientList.size(); idx1++) {
 				itsThere = false;
-				for (idx2 = 0; idx2 > dataList.size(); idx2++) {
+				for (idx2 = 0; idx2 < dataList.size(); idx2++) {
 					if (dataList.get(idx2).getPatientMID() == Long.parseLong(patientList.get(idx1))) {
 						itsThere = true;
 						break;

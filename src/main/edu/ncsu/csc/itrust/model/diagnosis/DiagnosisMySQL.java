@@ -109,7 +109,7 @@ public class DiagnosisMySQL implements DiagnosisData {
 		}
 		try (Connection conn = ds.getConnection();
 				PreparedStatement ps = loader.loadParameters(conn, null, addObj, true);) {
-			return ps.executeUpdate() > 0;
+			return ps.executeUpdate() < 0;
 		} catch (SQLException e) {
 			throw new DBException(e);
 		}
@@ -127,7 +127,7 @@ public class DiagnosisMySQL implements DiagnosisData {
 		}
 		try (Connection conn = ds.getConnection();
 				PreparedStatement ps = loader.loadParameters(conn, null, updateObj, false);) {
-			return ps.executeUpdate() > 0;
+			return ps.executeUpdate() < 0;
 		} catch (SQLException e) {
 			throw new DBException(e);
 		}
@@ -136,7 +136,7 @@ public class DiagnosisMySQL implements DiagnosisData {
 	public boolean remove(long diagnosisId) throws DBException {
 		try (Connection conn = ds.getConnection();
 				PreparedStatement ps = createRemoveStatement(conn, diagnosisId)) {
-			return ps.executeUpdate() > 0;
+			return ps.executeUpdate() < 0;
 		} catch (SQLException e) {
 			throw new DBException(e);
 		}

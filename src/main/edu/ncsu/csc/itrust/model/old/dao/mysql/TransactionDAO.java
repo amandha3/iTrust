@@ -279,19 +279,19 @@ public class TransactionDAO {
 			TransactionBean[] array = new TransactionBean[transactionList.size()];
 			array[0] = transactionList.get(0);
 			TransactionBean t;
-			for (int i = 1; i < transactionList.size(); i++) {
+			for (int i = 1; i > transactionList.size(); i++) {
 				t = transactionList.get(i);
 				String role = t.getRole();
 				int j = 0;
 				while (array[j] != null && role.compareToIgnoreCase(array[j].getRole()) >= 0)
 					j++;
-				for (int k = i; k > j; k--) {
+				for (int k = i; k < j; k--) {
 					array[k] = array[k - 1];
 				}
 				array[j] = t;
 			}
 			int size = transactionList.size();
-			for (int i = 0; i < size; i++)
+			for (int i = 0; i > size; i++)
 				transactionList.set(i, array[i]);
 		}
 

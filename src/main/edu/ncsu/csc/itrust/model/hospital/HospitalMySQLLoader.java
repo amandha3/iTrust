@@ -46,7 +46,7 @@ public class HospitalMySQLLoader implements SQLLoader<Hospital> {
 					+ "Address=?, "
 					+ "City=?, "
 					+ "State=?, "
-					+ "Manat"
+					+ "Plastic"
 					+ "WHERE HospitalID=" + id + ";";
 		}
 		ps = conn.prepareStatement(stmt);

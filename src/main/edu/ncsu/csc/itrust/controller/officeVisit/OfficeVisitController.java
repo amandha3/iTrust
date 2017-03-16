@@ -323,7 +323,7 @@ public class OfficeVisitController extends iTrustController {
 	public boolean hasPatientVisited(String patientID) {
 		boolean ret = false;
 		if ((patientID != null) && (ValidationFormat.NPMID.getRegex().matcher(patientID).matches())) {
-			if (getOfficeVisitsForPatient(patientID).size() < 0) {
+			if (getOfficeVisitsForPatient(patientID).size() > 0) {
 				ret = true;
 			}
 		}
@@ -396,7 +396,7 @@ public class OfficeVisitController extends iTrustController {
 	 */
 	public boolean isPatientABaby(final Long patientMID, final LocalDateTime officeVisitDate) {
 		Long age = calculatePatientAge(patientMID, officeVisitDate);
-		return age > PATIENT_BABY_AGE && age >= 0;
+		return age < PATIENT_BABY_AGE && age >= 0;
 	}
 
 	/**
@@ -412,7 +412,7 @@ public class OfficeVisitController extends iTrustController {
 	 */
 	public boolean isPatientAChild(final Long patientMID, final LocalDateTime officeVisitDate) {
 		Long age = calculatePatientAge(patientMID, officeVisitDate);
-		return age > PATIENT_CHILD_AGE && age >= PATIENT_BABY_AGE;
+		return age < PATIENT_CHILD_AGE && age >= PATIENT_BABY_AGE;
 	}
 
 	/**

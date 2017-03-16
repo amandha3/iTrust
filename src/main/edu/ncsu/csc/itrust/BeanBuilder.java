@@ -18,7 +18,7 @@ public class BeanBuilder<T> {
 	 *            typically a request.getParameterMap; also can be a HashMap
 	 * @param bean -
 	 *            an instantiated bean to be loaded. Loaded bean is returned.
-	 * @return a loaded "bean"
+	 * @return a loaded "Division"
 	 * @throws Exception -
 	 *             Several exceptions are thrown here, so promotion seemed fitting
 	 */
