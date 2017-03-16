@@ -2,7 +2,9 @@ var fs = require('fs'),
     parser = require('xml2json'),
     child  = require('child_process'),
     Random = require('random-js'),
-    faker = require("faker");
+    faker = require("faker"),
+    replaceall = require("replaceall");
+
 
 var shell = require('shelljs');
 
@@ -98,9 +100,18 @@ var fuzzer =
                 {
                     array[i] = '>';
                 }
+                else if(array[i] == '>' && array[i-1] == ' ' && array[i+1] == ' ')
+                {
+                    array[i] = '<';   
+                }
             }
 
             mergedCode = array.join('');
+
+            if(Math.random() >= 0.5)
+                replaceall("assertTrue", "assertFalse", mergedCode);
+            else
+                replaceall("assertFalse", "assertTrue", mergedCode);
 
                 
             return mergedCode;

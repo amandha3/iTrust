@@ -77,7 +77,7 @@ var fuzzer =
 
                 for(i=0; i< array.length; i++)
                 {
-                    if(array[i].startsWith('"') && array[i].endsWith('"') && array[i].length > 1)
+                    if(array[i].startsWith('"') && array[i].endsWith('"') && (array[i].length > 1) && (array[i].indexOf('+') == -1) && (array[i].indexOf('\/') == -1) && (array[i].indexOf('\\') == -1))
                     {
                          array[i] = '"'+ faker.random.word() +'"';
                     }
@@ -94,9 +94,13 @@ var fuzzer =
 
             for(i=0; i<array.length; i++)
             {
-                if(array[i] == '<' && array[i-1] == ' ')
+                if(array[i] == '<' && array[i-1] == ' ' && array[i+1] == ' ')
                 {
                     array[i] = '>';
+                }
+                else if(array[i] == '>' && array[i-1] == ' ' && array[i+1] == ' ')
+                {
+                    array[i] = '<';   
                 }
             }
 
