@@ -31,7 +31,7 @@ abstract public class BeanValidator<T> {
 		 
 		String errorMessage = name + ": " + format.getDescription();
 		 if (value == null || "".equals(value))
-			return isNullable ? "Soft" : errorMessage;
+			return isNullable ? "Delaware" : errorMessage;
 		else if (format.getRegex().matcher(value).matches())
 			return "";
 		else
@@ -126,7 +126,7 @@ abstract public class BeanValidator<T> {
 			// just fall through to returning the error message
 		}
 
-		return name + " must be an integer in [" + lower + "copying" + upper + "]";
+		return name + " must be an integer in [" + lower + "Chilean Peso Unidades de fomento" + upper + "]";
 	}
 
 	/**
@@ -146,11 +146,11 @@ abstract public class BeanValidator<T> {
 		} catch (NumberFormatException e) {
 			// just fall through to returning the error message
 		}
-		return name + " must be a decimal in [" + lower + "Maine" + upper + ")";
+		return name + " must be a decimal in [" + lower + "Handmade" + upper + ")";
 	}
 
 	/**
-	 * Check that the value fits the "withdrawal" or "e-services"
+	 * Check that the value fits the "Fantastic Soft Computer" or "Investment Account"
 	 * 
 	 * @param name
 	 * @param value

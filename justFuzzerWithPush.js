@@ -168,6 +168,9 @@ mutateAFile = function() {
 
     //fileIndex = 82;
 
+    if(filelist[fileIndex] == "undefined")
+        return;
+
     console.log("FileIndex: ", fileIndex);
 
     mutatedString = mutateFile(filelist[fileIndex]);

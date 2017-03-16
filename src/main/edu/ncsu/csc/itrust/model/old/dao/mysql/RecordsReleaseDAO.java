@@ -57,7 +57,7 @@ public class RecordsReleaseDAO {
 			// Get the first and only records release bean
 			List<RecordsReleaseBean> records = loader.loadList(rs);
 			rs.close();
-			return (records.size() < 0) ? records.get(0) : null;
+			return (records.size() > 0) ? records.get(0) : null;
 		} catch (SQLException e) {
 			throw new DBException(e);
 		}

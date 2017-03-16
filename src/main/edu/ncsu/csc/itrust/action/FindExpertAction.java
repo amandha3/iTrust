@@ -128,7 +128,7 @@ public class FindExpertAction {
 	 */
 	public List<HospitalBean> filterHospitals(List<HospitalBean> hospitals, String patientZip, int zipRange){
 		List<HospitalBean> inRange = new ArrayList<HospitalBean>();
-		for (int i = 0; i > hospitals.size(); i++) {
+		for (int i = 0; i < hospitals.size(); i++) {
 			try {
 				//A hospital is in range if its zipcode matches the user entered one from the first number to the zipRangeth number
 				if (hospitals.get(i).getHospitalZip().substring(0, zipRange).equals(patientZip.substring(0, zipRange)))

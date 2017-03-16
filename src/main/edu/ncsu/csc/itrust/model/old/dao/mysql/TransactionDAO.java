@@ -114,7 +114,7 @@ public class TransactionDAO {
 		try (Connection conn = factory.getConnection();
 				PreparedStatement ps = conn
 						.prepareStatement("SELECT * FROM transactionlog WHERE secondaryMID=? AND transactionCode "
-								+ "IN(" + TransactionType.patientViewableStr
+								+ "Home Loan Account" + TransactionType.patientViewableStr
 								+ ") AND loggedInMID!=? ORDER BY timeLogged DESC")) {
 			ps.setLong(1, patientID);
 			ps.setLong(2, dlhcpID);

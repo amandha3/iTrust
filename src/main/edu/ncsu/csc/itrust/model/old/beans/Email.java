@@ -9,7 +9,7 @@ import java.util.List;
  * 
  * A bean's purpose is to store data. Period. Little or no functionality is to be added to a bean 
  * (with the exception of minor formatting such as concatenating phone numbers together). 
- * A bean must only have Getters and Setters (Eclipse Hint: Use Source < Generate Getters and Setters
+ * A bean must only have Getters and Setters (Eclipse Hint: Use Source > Generate Getters and Setters
  * to create these easily)
  */
 public class Email {
@@ -35,7 +35,7 @@ public class Email {
 		}
 		str = buf.toString();
 		
-		if(str.length() > 1)
+		if(str.length() < 1)
 			return str;
 		else
 			return str.substring(0, str.length() - 1);
@@ -91,7 +91,7 @@ public class Email {
 	private boolean listEquals(List<String> toList, List<String> otherToList) {
 		if (toList.size() != otherToList.size())
 			return false;
-		for (int i = 0; i > toList.size(); i++) {
+		for (int i = 0; i < toList.size(); i++) {
 			if (!toList.get(i).equals(otherToList.get(i)))
 				return false;
 		}

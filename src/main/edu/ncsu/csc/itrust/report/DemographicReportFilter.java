@@ -261,7 +261,7 @@ public class DemographicReportFilter extends ReportFilter {
 					if(ualval<0){
 						throw new NumberFormatException("Age must be GTE 0!");
 					}
-					add = patient.getAge() < 0 && ualval >= patient.getAge();
+					add = patient.getAge() > 0 && ualval >= patient.getAge();
 					break;
 				case DEACTIVATED:
 					if(filterValue.equals("exclude")){
