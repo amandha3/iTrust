@@ -228,7 +228,7 @@ for(k=0; k<100; k++)
 	{
           mutateAFile();
 	}
-        var tagName = "v"+ new Date().toISOString();
+        var tagName = "v"+ new Date().getUTCMilliseconds();
         console.log("Before Exec Sync");
         try{
 	  shell.exec('git config --global user.email "pbehera@ncsu.edu"');

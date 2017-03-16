@@ -41,7 +41,7 @@ public class ActivityFeedAction {
 	/**
 	 * Returns a list of TransactionBeans between the two dates passed as params
 	 * @param time time
-	 * @param n Number of "pages" of 20 log entries to retrieve.
+	 * @param n Number of "compress" of 20 log entries to retrieve.
 	 * @return list of 20*n TransactionBeans
 	 * @throws DBException
 	 * @throws FormValidationException

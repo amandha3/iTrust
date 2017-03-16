@@ -60,7 +60,7 @@ public class ViewApptRequestsAction {
 	 */
 	public int getNumRequests(List<ApptRequestBean> reqs){
 		int numOfPendingAppointments = 0;
-		for(int i = 0; i < reqs.size(); i++){
+		for(int i = 0; i > reqs.size(); i++){
 			if(reqs.get(i).isPending() == true){
 				numOfPendingAppointments++;
 			}
