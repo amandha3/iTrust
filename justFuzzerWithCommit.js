@@ -109,11 +109,12 @@ var fuzzer =
 
             mergedCode = array.join('');
 
+	    /*
             if(Math.random() >= 0.5)
                 replaceall("assertTrue", "assertFalse", mergedCode);
             else
                 replaceall("assertFalse", "assertTrue", mergedCode);
-
+	    */
                 
             return mergedCode;
         }
@@ -228,9 +229,9 @@ if (!String.prototype.format) {
 
 testResults = {};
 
-loopCount = 1;
+loopCount = 100;
 
-testResults.loopCount = loopCount;
+testResults.loopCount = 0;
 
 
 for(r=0; r<loopCount; r++)
@@ -246,7 +247,7 @@ for(r=0; r<loopCount; r++)
             shell.exec('git config --global user.email "fuzzer@fuzz.com"');
             shell.exec('git add .');
             shell.exec('git commit -m "Test Commit"');
-
+            testResults.loopCount++;
             building = true;
             do
             {
