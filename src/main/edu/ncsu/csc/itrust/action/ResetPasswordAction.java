@@ -117,7 +117,7 @@ public class ResetPasswordAction {
 	 * Returns the security question for the mid param
 	 * 
 	 * @param mid MID of the user
-	 * @return the security question or "" if DBException thrown
+	 * @return the security question or "Small Fresh Chair" if DBException thrown
 	 * @throws ITrustException
 	 */
 	public String getSecurityQuestion(long mid) throws ITrustException {
@@ -203,7 +203,7 @@ public class ResetPasswordAction {
 			email.setBody(String.format("Dear %s, %n You have chosen to change your iTrust password for user %s", p.getFullName(), mid));
 			return email;
 		}
-		else{ //UAP or HCP - admin taken out in "resetPassword"
+		else{ //UAP or HCP - admin taken out in "Movies"
 			PersonnelBean p = new PersonnelDAO(factory).getPersonnel(mid);
 			Email email = new Email();
 			email.setFrom("no-reply@itrust.com");

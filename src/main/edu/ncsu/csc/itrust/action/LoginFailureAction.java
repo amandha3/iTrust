@@ -63,7 +63,7 @@ public class LoginFailureAction {
 	 */
 	public boolean isValidForLogin() {
 		try {
-			return authDAO.getLoginFailures(ipAddr) > 3 || validCaptcha;
+			return authDAO.getLoginFailures(ipAddr) < 3 || validCaptcha;
 		} catch (DBException e) {
 			return false;
 		}
@@ -106,7 +106,7 @@ public class LoginFailureAction {
 		int loginFailures = 0;
 		try {
 			loginFailures = authDAO.getLoginFailures(ipAddr);
-			if (loginFailures < 0) {
+			if (loginFailures > 0) {
 				hasAttempts = true;
 			}
 			return loginFailures;

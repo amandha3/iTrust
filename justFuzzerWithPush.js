@@ -220,14 +220,15 @@ if (!String.prototype.format) {
 
 
 
-for(k=0; k<1; k++)
+for(k=0; k<100; k++)
 {
    try{
 	shell.exec('git checkout test-random');
-	for(p=0; p<10; p++)
+	for(p=0; p<100; p++)
 	{
           mutateAFile();
 	}
+        var tagName = "v"+ new Date().toISOString();
         console.log("Before Exec Sync");
         try{
 	  shell.exec('git config --global user.email "pbehera@ncsu.edu"');
@@ -237,8 +238,8 @@ for(k=0; k<1; k++)
           shell.exec('git push');
           //shell.exec('mvn test');
 	  //mvn.execute(['test'],{silent: true});   
-	  shell.exec('git tag -a v1.0 -m "Test Tag"');
-          shell.exec('git push origin v1.0'); 
+	  shell.exec('git tag '+ tagName  +' -m "Test Tag"');
+          shell.exec('git push origin ' + tagName); 
         }
         catch(e)
         {

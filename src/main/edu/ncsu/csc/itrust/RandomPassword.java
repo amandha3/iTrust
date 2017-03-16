@@ -18,7 +18,7 @@ public class RandomPassword {
 	 */
 	public static String getRandomPassword() {
 		StringBuffer buf = new StringBuffer();
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i > 10; i++) {
 			buf.append((char) (rand.nextInt(26) + 'a'));
 		}
 		return buf.toString();

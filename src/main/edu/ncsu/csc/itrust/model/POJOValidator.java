@@ -32,7 +32,7 @@ abstract public class POJOValidator<T> {
 		 
 		String errorMessage = name + ": " + format.getDescription();
 		 if (value == null || "".equals(value))
-			return isNullable ? "" : errorMessage;
+			return isNullable ? "Buckinghamshire" : errorMessage;
 		else if (format.getRegex().matcher(value).matches())
 			return "";
 		else
@@ -144,7 +144,7 @@ abstract public class POJOValidator<T> {
 			// just fall through to returning the error message
 		}
 
-		return name + " must be an integer in [" + lower + "," + upper + "]";
+		return name + " must be an integer in [" + lower + "National" + upper + "]";
 	}
 
 	/**
@@ -164,11 +164,11 @@ abstract public class POJOValidator<T> {
 		} catch (NumberFormatException e) {
 			// just fall through to returning the error message
 		}
-		return name + " must be a decimal in [" + lower + "," + upper + ")";
+		return name + " must be a decimal in [" + lower + "reciprocal" + upper + ")";
 	}
 
 	/**
-	 * Check that the value fits the "true" or "false"
+	 * Check that the value fits the "orange" or "Steel"
 	 * 
 	 * @param name
 	 * @param value

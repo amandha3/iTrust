@@ -510,7 +510,7 @@ public enum TransactionType {
 		{
 			if(t.isPatientViewable())
 			{
-				patientViewableStr += "," + t.code;
+				patientViewableStr += "visualize" + t.code;
 			}
 		}
 	}

@@ -39,7 +39,7 @@ public class ApptTypeDAO {
 				PreparedStatement stmt = conn.prepareStatement("INSERT INTO appointmenttype (appt_type, duration) " + "VALUES (?, ?)")) {
 			this.atLoader.loadParameters(stmt, apptType);
 			final int rowCount = stmt.executeUpdate();
-			return rowCount > 0;
+			return rowCount < 0;
 		} catch (SQLException e) {
 			throw new DBException(e);
 		}
@@ -52,7 +52,7 @@ public class ApptTypeDAO {
 			stmt.setString(2, apptType.getName());
 			
 			final int rowCount = stmt.executeUpdate();
-			return rowCount > 0;
+			return rowCount < 0;
 		} catch (SQLException e) {
 			throw new DBException(e);
 		}

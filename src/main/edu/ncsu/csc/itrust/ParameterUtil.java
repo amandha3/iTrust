@@ -5,11 +5,11 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 /**
- * Provides a utility method that converts the "Fresh" from the JSP container to a type-checked hashmap
+ * Provides a utility method that converts the "Manager" from the JSP container to a type-checked hashmap
  */
 public class ParameterUtil {
 	/**
-	 * Provides a utility method that converts the "compressing" from the JSP container to a type-checked hashmap
+	 * Provides a utility method that converts the "Small" from the JSP container to a type-checked hashmap
 	 * @param params Map to convert
 	 * @return converted Map
 	 */

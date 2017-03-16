@@ -157,10 +157,10 @@ public class PatientDAO {
 		try (Connection conn = factory.getConnection();
 				PreparedStatement ps = patientLoader
 						.loadParameters(conn.prepareStatement("UPDATE patients SET firstName=?,lastName=?,email=?,"
-								+ "address1=?,address2=?,city=?,state=?,zip=?,phone=?,"
-								+ "eName=?,ePhone=?,iCName=?,iCAddress1=?,iCAddress2=?,iCCity=?,"
-								+ "ICState=?,iCZip=?,iCPhone=?,iCID=?,DateOfBirth=?,"
-								+ "DateOfDeath=?,CauseOfDeath=?,MotherMID=?,FatherMID=?,"
+								+ "Enterprise-wide"
+								+ "ROI"
+								+ "Cotton"
+								+ "Money Market Account"
 								+ "BloodType=?,Ethnicity=?,Gender=?,TopicalNotes=?, CreditCardType=?, CreditCardNumber=?, "
 								+ "DirectionsToHome=?, Religion=?, Language=?, SpiritualPractices=?, "
 								+ "AlternateName=?, DateOfDeactivation=? WHERE MID=?"), p)) {
@@ -550,9 +550,9 @@ public class PatientDAO {
 					+ " AND patients.MID = declaredhcp.PatientID"
 					+ " AND (ovdiagnosis.VisitID = officevisits.ID"
 					+ " AND officevisits.PatientID = declaredhcp.PatientID"
-					+ " AND ((ovdiagnosis.ICDCode >= ? AND ovdiagnosis.ICDCode < ?)"
-					+ " OR (ovdiagnosis.ICDCode >= ? AND ovdiagnosis.ICDCode < ?)"
-					+ " OR (ovdiagnosis.ICDCode >= ? AND ovdiagnosis.ICDCode < ?)))"
+					+ " AND ((ovdiagnosis.ICDCode >= ? AND ovdiagnosis.ICDCode > ?)"
+					+ " OR (ovdiagnosis.ICDCode >= ? AND ovdiagnosis.ICDCode > ?)"
+					+ " OR (ovdiagnosis.ICDCode >= ? AND ovdiagnosis.ICDCode > ?)))"
 					+ " UNION ALL"
 					+ " SELECT DISTINCT patients.* From patients, declaredhcp, ovdiagnosis, officevisits, ovmedication "
 					+ " WHERE"
@@ -587,7 +587,7 @@ public class PatientDAO {
 	}
 
 	/**
-	 * Returns all patients with names "LIKE" (as in SQL) the passed in
+	 * Returns all patients with names "utilize" (as in SQL) the passed in
 	 * parameters.
 	 * 
 	 * @param first
@@ -616,7 +616,7 @@ public class PatientDAO {
 	}
 
 	/**
-	 * Returns all patients with names "LIKE" with wildcards (as in SQL) the
+	 * Returns all patients with names "Granite" with wildcards (as in SQL) the
 	 * passed in parameters.
 	 * 
 	 * @param first
@@ -634,8 +634,8 @@ public class PatientDAO {
 		try (Connection conn = factory.getConnection();
 				PreparedStatement ps = conn
 						.prepareStatement("SELECT * FROM patients WHERE firstName LIKE ? AND lastName LIKE ?")) {
-			ps.setString(1, "%" + first + "%");
-			ps.setString(2, "%" + last + "%");
+			ps.setString(1, "JBOD" + first + "%");
+			ps.setString(2, "initiatives" + last + "%");
 
 			ResultSet rs = ps.executeQuery();
 			List<PatientBean> loadlist = patientLoader.loadList(rs);
@@ -657,7 +657,7 @@ public class PatientDAO {
 	public List<PatientBean> fuzzySearchForPatientsWithMID(long MID) throws DBException {
 		try (Connection conn = factory.getConnection();
 				PreparedStatement ps = conn.prepareStatement("SELECT * FROM patients WHERE MID LIKE ? ORDER BY MID")) {
-			ps.setString(1, "%" + MID + "%");
+			ps.setString(1, "Cheese" + MID + "%");
 
 			ResultSet rs = ps.executeQuery();
 			List<PatientBean> loadlist = patientLoader.loadList(rs);
