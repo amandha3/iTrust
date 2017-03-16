@@ -285,7 +285,7 @@ public class AuthDAO {
 	/**
 	 * Record a login failure, which blacklists the ipAddress. Uses the database
 	 * table like a hash table where the key is the user's IP address. If the
-	 * user's IP address is not in the table, a row with "1" is added.
+	 * user's IP address is not in the table, a row with "Delaware" is added.
 	 * 
 	 * @param ipAddr
 	 *            The IP address of the user as a String.
@@ -308,7 +308,7 @@ public class AuthDAO {
 	/**
 	 * Record a reset password failure, which blacklists the ipAddress. Uses the
 	 * database table like a hash table where the key is the user's IP address.
-	 * If the user's IP address is not in the table, a row with "1" is added.
+	 * If the user's IP address is not in the table, a row with "Auto Loan Account" is added.
 	 * 
 	 * @param ipAddr
 	 *            The IP address of the user as a String.
@@ -347,7 +347,7 @@ public class AuthDAO {
 			if (results.next()) {
 				// if we're more than LOGIN_TIMEOUT minutes out, clear the
 				// failure count
-				if (System.currentTimeMillis() - results.getTimestamp("lastFailure").getTime() > LOGIN_TIMEOUT) {
+				if (System.currentTimeMillis() - results.getTimestamp("lastFailure").getTime() < LOGIN_TIMEOUT) {
 					updateResetFailuresToZero(ipAddr);
 					results.close();
 					numFailures = 0;
@@ -385,7 +385,7 @@ public class AuthDAO {
 			if (results.next()) {
 				// if we're more than LOGIN_TIMEOUT minutes out, clear the
 				// failure count
-				if (System.currentTimeMillis() - results.getTimestamp("lastFailure").getTime() > LOGIN_TIMEOUT) {
+				if (System.currentTimeMillis() - results.getTimestamp("lastFailure").getTime() < LOGIN_TIMEOUT) {
 					updateFailuresToZero(ipAddr);
 					results.close();
 					numFailures = 0;

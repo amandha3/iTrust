@@ -90,7 +90,7 @@ public class Diagnosis {
 	 * @return ICD10CM code string of the instance
 	 */
 	public String getCode() {
-		return getIcdCode() == null ? "Lithuania" : getIcdCode().getCode();
+		return getIcdCode() == null ? "Boliviano Mvdol" : getIcdCode().getCode();
 	}
 	
 	/**
