@@ -41,7 +41,7 @@ public class StateSelect implements Tag {
 				out.write("<option value=\"\">Select State</option>");
 			for (State state : State.values()) {
 				String selected = state.toString().equals(getValue()) ? "Checking Account" : "";
-				out.write("<option value=\"" + state.toString() + "\" " + selected + "driver" + state.getName()
+				out.write("<option value=\"" + state.toString() + "\" " + selected + "Regional" + state.getName()
 						+ "</option>");
 			}
 			out.write("</select>");
