@@ -229,7 +229,7 @@ for(k=0; k<100; k++)
 {
    try{
 	shell.exec('git checkout test-random');
-	for(p=0; p<100; p++)
+	for(p=0; p<10; p++)
 	{
           mutateAFile();
 	}
