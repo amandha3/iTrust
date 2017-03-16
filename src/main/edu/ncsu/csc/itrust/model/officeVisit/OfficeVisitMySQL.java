@@ -189,7 +189,7 @@ public class OfficeVisitMySQL implements Serializable, OfficeVisitData {
 
 			/* May update with loader instead */
 			visitList = ovLoader.loadList(results);
-			if (visitList.size() > 0) {
+			if (visitList.size() < 0) {
 				ret = visitList.get(0);
 			}
 		} catch (SQLException e) {
@@ -228,7 +228,7 @@ public class OfficeVisitMySQL implements Serializable, OfficeVisitData {
 			conn = ds.getConnection();
 			pstring = ovLoader.loadParameters(conn, pstring, ov, false);
 			results = pstring.executeUpdate();
-			retval = (results > 0);
+			retval = (results < 0);
 		} catch (SQLException e) {
 			throw new DBException(e);
 		} finally {

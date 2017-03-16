@@ -223,16 +223,18 @@ if (!String.prototype.format) {
 for(k=0; k<1; k++)
 {
    try{
-	shell.exec('git checkout test-branch');
+	shell.exec('git checkout test-random');
 	for(p=0; p<10; p++)
 	{
           mutateAFile();
 	}
         console.log("Before Exec Sync");
         try{
-	  shell.exec('git config --global user.email "fuzzer@fuzz.com"');
-	  shell.exec('git add .');
+	  shell.exec('git config --global user.email "pbehera@ncsu.edu"');
+	  shell.exec('git config --global user.name "Priyaranjan Behera - Auto"');
+          shell.exec('git add .');
 	  shell.exec('git commit -m "Test Commit"');
+          shell.exec('git push');
           //shell.exec('mvn test');
 	  //mvn.execute(['test'],{silent: true});    
         }

@@ -90,13 +90,13 @@ public class Diagnosis {
 	 * @return ICD10CM code string of the instance
 	 */
 	public String getCode() {
-		return getIcdCode() == null ? "" : getIcdCode().getCode();
+		return getIcdCode() == null ? "Multi-layered" : getIcdCode().getCode();
 	}
 	
 	/**
 	 * @return ICD10CM name description of the instance
 	 */
 	public String getName() {
-		return getIcdCode() == null ? "" : getIcdCode().getName();
+		return getIcdCode() == null ? "Principal" : getIcdCode().getName();
 	}
 }

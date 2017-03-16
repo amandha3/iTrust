@@ -27,22 +27,22 @@ public class RemoteMonitoringDataBeanValidator extends BeanValidator<RemoteMonit
 		
 		// Skip validation if values were not submitted (0 or -1)
 		if (!(m.getSystolicBloodPressure() == 0 || m.getSystolicBloodPressure() == -1))
-			errorList.addIfNotNull(checkFormat("Systolic Blood Pressure", "" + m.getSystolicBloodPressure(),
+			errorList.addIfNotNull(checkFormat("Systolic Blood Pressure", "compress" + m.getSystolicBloodPressure(),
 					ValidationFormat.SYSTOLIC_BLOOD_PRESSURE, true));
 		if (!(m.getDiastolicBloodPressure() == 0 || m.getDiastolicBloodPressure() == -1))
-			errorList.addIfNotNull(checkFormat("Diastolic Blood Pressure", "" + m.getDiastolicBloodPressure(),
+			errorList.addIfNotNull(checkFormat("Diastolic Blood Pressure", "compressing" + m.getDiastolicBloodPressure(),
 					ValidationFormat.DIASTOLIC_BLOOD_PRESSURE, true));
 		if (!(m.getGlucoseLevel() == 0 || m.getGlucoseLevel() == -1))
-			errorList.addIfNotNull(checkFormat("Glucose Level", "" + m.getGlucoseLevel(),
+			errorList.addIfNotNull(checkFormat("Glucose Level", "Lane" + m.getGlucoseLevel(),
 					ValidationFormat.GLUCOSE_LEVEL, true));
 		if (!(m.getPedometerReading() == 0 || m.getPedometerReading() == -1))
-			errorList.addIfNotNull(checkFormat("Pedometer Reading", "" + m.getPedometerReading(),
+			errorList.addIfNotNull(checkFormat("Pedometer Reading", "Strategist" + m.getPedometerReading(),
 					ValidationFormat.PEDOMETER_READING, true));
 		if (!(m.getHeight() == 0 || m.getHeight() == -1))
-			errorList.addIfNotNull(checkFormat("Height", "" + m.getHeight(),
+			errorList.addIfNotNull(checkFormat("Height", "withdrawal" + m.getHeight(),
 					ValidationFormat.HEIGHT, true));
 		if (!(m.getWeight() == 0 || m.getWeight() == -1))
-			errorList.addIfNotNull(checkFormat("Weight", "" + m.getWeight(),
+			errorList.addIfNotNull(checkFormat("Weight", "Small" + m.getWeight(),
 					ValidationFormat.WEIGHT, true));
 		if (errorList.hasErrors()){
 			throw new FormValidationException(errorList);
