@@ -77,7 +77,7 @@ var fuzzer =
 
                 for(i=0; i< array.length; i++)
                 {
-                    if(array[i].startsWith('"') && array[i].endsWith('"') && array[i].length > 1)
+                    if(array[i].startsWith('"') && array[i].endsWith('"') && (array[i].length > 1) && (array[i].indexOf('+') == -1) && (array[i].indexOf('\/') == -1) && (array[i].indexOf('\\') == -1))
                     {
                          array[i] = '"'+ faker.random.word() +'"';
                     }
@@ -94,9 +94,13 @@ var fuzzer =
 
             for(i=0; i<array.length; i++)
             {
-                if(array[i] == '<' && array[i-1] == ' ')
+                if(array[i] == '<' && array[i-1] == ' ' && array[i+1] == ' ')
                 {
                     array[i] = '>';
+                }
+                else if(array[i] == '>' && array[i-1] == ' ' && array[i+1] == ' ')
+                {
+                    array[i] = '<';   
                 }
             }
 
@@ -220,8 +224,10 @@ for(k=0; k<1; k++)
 {
    try{
 	shell.exec('git checkout test-branch');
-	for(p=0; p<5; p++)
+	for(p=0; p<10; p++)
+	{
           mutateAFile();
+	}
         console.log("Before Exec Sync");
         try{
 	  shell.exec('git config --global user.email "fuzzer@fuzz.com"');

@@ -2,7 +2,9 @@ var fs = require('fs'),
     parser = require('xml2json'),
     child  = require('child_process'),
     Random = require('random-js'),
-    faker = require("faker");
+    faker = require("faker"),
+    replaceall = require("replaceall");
+
 
 var shell = require('shelljs');
 
@@ -77,7 +79,7 @@ var fuzzer =
 
                 for(i=0; i< array.length; i++)
                 {
-                    if(array[i].startsWith('"') && array[i].endsWith('"')&& array[i].length > 1)
+                    if(array[i].startsWith('"') && array[i].endsWith('"') && (array[i].length > 1) && (array[i].indexOf('+') == -1) && (array[i].indexOf('\/') == -1) && (array[i].indexOf('\\') == -1))
                     {
                          array[i] = '"'+ faker.random.word() +'"';
                     }
@@ -94,13 +96,22 @@ var fuzzer =
 
             for(i=0; i<array.length; i++)
             {
-                if(array[i] == '<' && array[i-1] == ' ')
+                if(array[i] == '<' && array[i-1] == ' ' && array[i+1] == ' ')
                 {
                     array[i] = '>';
+                }
+                else if(array[i] == '>' && array[i-1] == ' ' && array[i+1] == ' ')
+                {
+                    array[i] = '<';   
                 }
             }
 
             mergedCode = array.join('');
+
+            if(Math.random() >= 0.5)
+                replaceall("assertTrue", "assertFalse", mergedCode);
+            else
+                replaceall("assertFalse", "assertTrue", mergedCode);
 
                 
             return mergedCode;
@@ -111,12 +122,12 @@ var fuzzer =
 
 function mutateFile(filename)
 {
-    console.log("Mutating File", filename);
+    //console.log("Mutating File", filename);
     var fileContent = fs.readFileSync(filename,'utf-8');
     //var markDown = fs.readFileSync('simple.md','utf-8');
 
     var mutuatedString = fuzzer.mutate.string(fileContent);
-    console.log("Mutated String: ", mutuatedString);
+    //console.log("Mutated String: ", mutuatedString);
 
     return mutuatedString;
 }
@@ -128,7 +139,7 @@ function mutationTesting()
 
     var mutuatedString = fuzzer.mutate.string(markDown);
 
-    console.log("Mutated String: ", mutuatedString);
+    //console.log("Mutated String: ", mutuatedString);
       
 }
 
@@ -169,8 +180,8 @@ mutateAFile = function() {
     mutatedString = mutateFile(filelist[fileIndex]);
 
     console.log("FileName: ", filelist[fileIndex]);
-    console.log("Mutated String");
-    console.log(mutatedString);
+    //console.log("Mutated String");
+    //console.log(mutatedString);
 
     fs.writeFileSync(filelist[fileIndex], mutatedString, 'utf8');
 };
@@ -221,7 +232,7 @@ loopCount = 100;
 testResults.loopCount = loopCount;
 
 
-for(k=0; k<loopCount; k++)
+for(r=0; r<loopCount; r++)
 {
    try{
 
@@ -247,7 +258,7 @@ for(k=0; k<loopCount; k++)
 
     filelist = walkSync(__dirname+'/target/surefire-reports',filelist);
 
-    console.log("FileList: ", filelist);
+    //console.log("FileList: ", filelist);
 
 
     for( i=0; i < filelist.length; i++)
@@ -257,9 +268,9 @@ for(k=0; k<loopCount; k++)
         if(filename.endsWith('.xml'))
         {
 
-           console.log("Reading File: ", filename);
+           //console.log("Reading File: ", filename);
            data = fs.readFileSync(filename).toString();
-           console.log("Reading File Content: ", data);
+           //console.log("Reading File Content: ", data);
            
            var options = {
                 object: true,
@@ -272,12 +283,12 @@ for(k=0; k<loopCount; k++)
             };
 
             result = parser.toJson(data, options);
-           console.log("Reading File Content Parsed: ", result);
+           //console.log("Reading File Content Parsed: ", result);
                 
 
                 for(key in result)
                 {
-                    console.log("Key: ", result[key]);
+                    //console.log("Key: ", result[key]);
                 }
                 //console.log(result.testsuite.testcase[0]);
                 // Print out everything
@@ -326,7 +337,7 @@ for(k=0; k<loopCount; k++)
                         else
                             testResults[keyName].success++;
                     }
-                    console.log("Inner: ", Date.now());
+                    //console.log("Inner: ", Date.now());
             //console.log("List length: ", list.length);
                 }
 
@@ -336,14 +347,14 @@ for(k=0; k<loopCount; k++)
     var s = JSON.stringify(testResults);
     fs.writeFileSync("testResults", s, 'utf8');
 
-    console.log("Comparing:");
+    //console.log("Comparing:");
 
     list.sort(compare);
 
-    console.log("Inner: ", Date.now());
-    console.log('Done');
+    //console.log("Inner: ", Date.now());
+    //console.log('Done');
 
-    console.log("List: ", list.length); 
+    console.log("Total List: ", list.length); 
 
      }
     catch(e)
