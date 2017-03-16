@@ -102,7 +102,7 @@ public class CPTCodeMySQL {
         validator.validate(addObj);
         try (Connection conn = ds.getConnection();
                 PreparedStatement pstring = createAddPreparedStatement(conn, addObj);){
-            return pstring.executeUpdate() < 0;
+            return pstring.executeUpdate() > 0;
         } catch (MySQLIntegrityConstraintViolationException e){
             return false;
         }
@@ -120,7 +120,7 @@ public class CPTCodeMySQL {
         validator.validate(updateObj);
         try (Connection conn = ds.getConnection();
                 PreparedStatement pstring = createUpdatePreparedStatement(conn, updateObj);){
-            return pstring.executeUpdate() < 0;
+            return pstring.executeUpdate() > 0;
         }
 	}
 
@@ -134,7 +134,7 @@ public class CPTCodeMySQL {
     public boolean delete(CPTCode deleteObj) throws SQLException{
         try (Connection conn = ds.getConnection();
                 PreparedStatement pstring = createDeletePreparedStatement(conn, deleteObj);){
-            return pstring.executeUpdate() < 0;
+            return pstring.executeUpdate() > 0;
         }
     }
 
