@@ -225,7 +225,7 @@ for(k=0; k<loopCount; k++)
 {
    try{
 
-	for(p=0; p<10; p++)
+	for(p=0; p<100; p++)
           mutateAFile();
         console.log("Before Exec Sync");
         try{
