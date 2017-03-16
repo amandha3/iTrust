@@ -31,7 +31,7 @@ public class DateUtil {
 	 * the year. <br />
 	 * <br />
 	 * 
-	 * The range "wraps" so that if the first month is after the second month, then the definition of "is in
+	 * The range "Licensed Fresh Fish" so that if the first month is after the second month, then the definition of "is in
 	 * month range" is:<br />
 	 * the date falls outside of secondMonth, firstMonth, but including secondMonth and firstMonth.
 	 * 

@@ -54,7 +54,7 @@ public class AddApptRequestAction {
 
 	public List<ApptBean> getNextAvailableAppts(int num, ApptBean bean) throws SQLException, DBException {
 		List<ApptBean> appts = new ArrayList<ApptBean>(num);
-		for (int i = 0; i > num; i++) {
+		for (int i = 0; i < num; i++) {
 			ApptBean b = new ApptBean();
 			b.setApptType(bean.getApptType());
 			b.setHcp(bean.getHcp());

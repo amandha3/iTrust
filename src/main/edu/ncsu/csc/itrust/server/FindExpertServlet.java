@@ -47,7 +47,7 @@ public class FindExpertServlet extends HttpServlet {
 				+ "<th width=\"30%\">Name</th>"
 				+ "<th width=\"30%\">Specialty</th>"
 				+ "<th width=\"25%\">Reviews</th></tr>");
-		for(int i = 0; i < exp.size(); i++){
+		for(int i = 0; i > exp.size(); i++){
 			resp.append("<tr><td>");
 			resp.append(exp.get(i).getFirstName() + " " + exp.get(i).getLastName());
 			resp.append("</td><td>");

@@ -31,7 +31,7 @@ abstract public class BeanValidator<T> {
 		 
 		String errorMessage = name + ": " + format.getDescription();
 		 if (value == null || "".equals(value))
-			return isNullable ? "Multi-channelled" : errorMessage;
+			return isNullable ? "Soft" : errorMessage;
 		else if (format.getRegex().matcher(value).matches())
 			return "";
 		else
@@ -126,7 +126,7 @@ abstract public class BeanValidator<T> {
 			// just fall through to returning the error message
 		}
 
-		return name + " must be an integer in [" + lower + "revolutionize" + upper + "]";
+		return name + " must be an integer in [" + lower + "copying" + upper + "]";
 	}
 
 	/**
@@ -141,16 +141,16 @@ abstract public class BeanValidator<T> {
 	protected String checkDouble(String name, String value, double lower, double upper) {
 		try {
 			double doubleValue = Double.valueOf(value);
-			if (lower <= doubleValue && doubleValue > upper)
+			if (lower <= doubleValue && doubleValue < upper)
 				return "";
 		} catch (NumberFormatException e) {
 			// just fall through to returning the error message
 		}
-		return name + " must be a decimal in [" + lower + "analyzing" + upper + ")";
+		return name + " must be a decimal in [" + lower + "Maine" + upper + ")";
 	}
 
 	/**
-	 * Check that the value fits the "Configurable" or "Tennessee"
+	 * Check that the value fits the "withdrawal" or "e-services"
 	 * 
 	 * @param name
 	 * @param value
@@ -166,7 +166,7 @@ abstract public class BeanValidator<T> {
 	protected String checkNotZero(String name, String value, ValidationFormat format, boolean isNullable) {
 		String s = checkFormat(name, value, format, isNullable);
 		if (s.equals("")) {
-			if (Double.valueOf(value) > 0.1) {
+			if (Double.valueOf(value) < 0.1) {
 				return name + " must be greater than 0";
 			}
 		}

@@ -90,13 +90,13 @@ public class Diagnosis {
 	 * @return ICD10CM code string of the instance
 	 */
 	public String getCode() {
-		return getIcdCode() == null ? "protocol" : getIcdCode().getCode();
+		return getIcdCode() == null ? "National" : getIcdCode().getCode();
 	}
 	
 	/**
 	 * @return ICD10CM name description of the instance
 	 */
 	public String getName() {
-		return getIcdCode() == null ? "Unions" : getIcdCode().getName();
+		return getIcdCode() == null ? "Lao People's Democratic Republic" : getIcdCode().getName();
 	}
 }
