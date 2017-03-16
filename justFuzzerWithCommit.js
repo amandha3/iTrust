@@ -105,16 +105,18 @@ var fuzzer =
                 {
                     array[i] = '<';   
                 }
+                else if(array[i] == '!' && array[i-1] == ' ' && array[i+1] == '=')
+                {
+                    array[i] = '=';   
+                }
+                else if(array[i] == '=' && array[i-1] == ' ' && array[i+1] == '=')
+                {
+                    array[i] = '!';   
+                }
             }
 
             mergedCode = array.join('');
 
-	    /*
-            if(Math.random() >= 0.5)
-                replaceall("assertTrue", "assertFalse", mergedCode);
-            else
-                replaceall("assertFalse", "assertTrue", mergedCode);
-	    */
                 
             return mergedCode;
         }
@@ -252,7 +254,7 @@ for(r=0; r<loopCount; r++)
             do
             {
 		sleep.sleep(5);
-                var buildJson = shell.exec('curl http://localhost:8080/job/iTrust_2/lastBuild/api/json').stdout;
+                var buildJson = shell.exec('curl http://localhost:8080/job/iTrust/lastBuild/api/json').stdout;
                 var s = JSON.stringify(buildJson);
     		fs.writeFileSync("buildJson", s, 'utf8');
 
@@ -276,7 +278,7 @@ for(r=0; r<loopCount; r++)
 
     filelist = [];
 
-    filelist = walkSync('/var/lib/jenkins/workspace/iTrust_2/target/surefire-reports',filelist);
+    filelist = walkSync('/var/lib/jenkins/workspace/iTrust/target/surefire-reports',filelist);
 
     //console.log("FileList: ", filelist);
 
