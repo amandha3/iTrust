@@ -2,7 +2,9 @@ var fs = require('fs'),
     parser = require('xml2json'),
     child  = require('child_process'),
     Random = require('random-js'),
-    faker = require("faker");
+    faker = require("faker"),
+    sleep = require('sleep');
+
 
 var shell = require('shelljs');
 
@@ -241,8 +243,11 @@ for(k=0; k<100; k++)
           shell.exec('git push');
           //shell.exec('mvn test');
 	  //mvn.execute(['test'],{silent: true});   
+          sleep.sleep(2);
 	  shell.exec('git tag '+ tagName  +' -m "Test Tag"');
+          sleep.sleep(2);
           shell.exec('git push origin ' + tagName); 
+          sleep.sleep(2);
         }
         catch(e)
         {

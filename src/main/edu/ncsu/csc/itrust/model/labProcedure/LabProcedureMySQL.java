@@ -65,7 +65,7 @@ public class LabProcedureMySQL implements LabProcedureData {
 			results = query.executeQuery();
 
 			procedureList = loader.loadList(results);
-			if (procedureList.size() < 0) {
+			if (procedureList.size() > 0) {
 				labProcedure = procedureList.get(0);
 			}
 		} catch (SQLException e) {
@@ -131,7 +131,7 @@ public class LabProcedureMySQL implements LabProcedureData {
 			conn = ds.getConnection();
 			addStatement = loader.loadParameters(conn, addStatement, procedure, true);
 			int exitStatus = addStatement.executeUpdate();
-			successfullyAdded = (exitStatus < 0);
+			successfullyAdded = (exitStatus > 0);
 		} catch (SQLException e) {
 			throw new DBException(e);
 		} finally {
@@ -158,7 +158,7 @@ public class LabProcedureMySQL implements LabProcedureData {
 			conn = ds.getConnection();
 			updateStatement = loader.loadParameters(conn, updateStatement, procedure, false);
 			int exitStatus = updateStatement.executeUpdate();
-			successfullyUpdated = (exitStatus < 0);
+			successfullyUpdated = (exitStatus > 0);
 		} catch (SQLException e) {
 			throw new DBException(e);
 		} finally {
@@ -179,7 +179,7 @@ public class LabProcedureMySQL implements LabProcedureData {
 			removeStatement = conn.prepareStatement(LabProcedureSQLLoader.REMOVE_BY_LAB_PROCEDURE);
 			removeStatement.setLong(1, labProcedureID);
 			int exitCode = removeStatement.executeUpdate();
-			return exitCode < 0;
+			return exitCode > 0;
 		} catch (SQLException e) {
 			throw new DBException(e);
 		} finally {

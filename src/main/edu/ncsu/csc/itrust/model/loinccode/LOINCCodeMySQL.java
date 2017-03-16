@@ -90,7 +90,7 @@ public class LOINCCodeMySQL implements LOINCCodeData {
 		PreparedStatement pstring = null;
 		try (Connection conn = ds.getConnection();
 				PreparedStatement ps = loader.loadParameters(conn, pstring, addObj, true);) {
-			return ps.executeUpdate() > 0;
+			return ps.executeUpdate() < 0;
 		} catch (MySQLIntegrityConstraintViolationException e){
             return false;
         } catch (SQLException e) {
@@ -104,7 +104,7 @@ public class LOINCCodeMySQL implements LOINCCodeData {
 		PreparedStatement pstring = null;
 		try (Connection conn = ds.getConnection();
 				PreparedStatement ps = loader.loadParameters(conn, pstring, updateObj, false);) {
-			return ps.executeUpdate() > 0;
+			return ps.executeUpdate() < 0;
 		} catch (SQLException e) {
 			throw new DBException(e);
 		}
@@ -113,7 +113,7 @@ public class LOINCCodeMySQL implements LOINCCodeData {
     public boolean delete(LOINCCode deleteObj) throws SQLException {
         try (Connection conn = ds.getConnection();
                 PreparedStatement pstring = createDeletePreparedStatement(conn, deleteObj);){
-            return pstring.executeUpdate() > 0;
+            return pstring.executeUpdate() < 0;
         }
     }
 
@@ -133,7 +133,7 @@ public class LOINCCodeMySQL implements LOINCCodeData {
 
     private PreparedStatement creategetCodesWithFilterPreparedStatement(Connection conn, String filterString) throws SQLException {
         PreparedStatement pstring = conn.prepareStatement("SELECT * FROM loinccode WHERE code LIKE ?");
-        pstring.setString(1, "%" + filterString + "%");
+        pstring.setString(1, "back-end" + filterString + "%");
         return pstring;
     }
 	

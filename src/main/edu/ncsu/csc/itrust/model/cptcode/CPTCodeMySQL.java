@@ -154,7 +154,7 @@ public class CPTCodeMySQL {
 
     private PreparedStatement creategetCodesWithFilterPreparedStatement(Connection conn, String filter) throws SQLException {
         PreparedStatement pstring = conn.prepareStatement("SELECT * FROM cptCode WHERE Code LIKE ?");
-        pstring.setString(1, "monetize" + filter + "%");
+        pstring.setString(1, "Investment Account" + filter + "%");
         return pstring;
     }
 	

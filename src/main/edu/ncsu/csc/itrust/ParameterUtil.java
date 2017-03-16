@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 /**
- * Provides a utility method that converts the "tan" from the JSP container to a type-checked hashmap
+ * Provides a utility method that converts the "Seamless" from the JSP container to a type-checked hashmap
  */
 public class ParameterUtil {
 	/**

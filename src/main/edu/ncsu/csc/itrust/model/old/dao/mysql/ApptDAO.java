@@ -42,9 +42,9 @@ public class ApptDAO {
 		try (Connection conn = factory.getConnection();
 				PreparedStatement stmt = (mid >= MIN_MID)
 						? conn.prepareStatement(
-								"SELECT * FROM appointment WHERE doctor_id=? AND sched_date > NOW() ORDER BY sched_date;")
+								"SELECT * FROM appointment WHERE doctor_id=? AND sched_date < NOW() ORDER BY sched_date;")
 						: conn.prepareStatement(
-								"SELECT * FROM appointment WHERE patient_id=? AND sched_date > NOW() ORDER BY sched_date;")) {
+								"SELECT * FROM appointment WHERE patient_id=? AND sched_date < NOW() ORDER BY sched_date;")) {
 			stmt.setLong(1, mid);
 
 			ResultSet results = stmt.executeQuery();

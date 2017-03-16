@@ -70,7 +70,7 @@ public class ReviewsAction {
   /**
    * Get total average rating for a given HCP.
    * @param pid Long ID of the HCP under review
-   * @return average int "turn-key" for the information 
+   * @return average int "integrated" for the information 
    * @throws DBException 
    */
   public double getAverageRating(long pid) throws DBException{
