@@ -250,12 +250,15 @@ for(r=0; r<loopCount; r++)
             building = true;
             do
             {
-                var buildJson = shell.exec('curl http://localhost:8080/job/iTrust_2/lastBuild/api/json').output;
-                obj = JSON.parse(buildJson);
+		sleep.sleep(5);
+                var buildJson = shell.exec('curl http://localhost:8080/job/iTrust_2/lastBuild/api/json').stdout;
+                var s = JSON.stringify(buildJson);
+    		fs.writeFileSync("buildJson", s, 'utf8');
+
+		obj = JSON.parse(buildJson);
                 building = obj.building;
             }while(building);
 
-            sleep.sleep(5);
 
       //mvn.execute(['test'],{silent: true});    
         }
@@ -272,7 +275,7 @@ for(r=0; r<loopCount; r++)
 
     filelist = [];
 
-    filelist = walkSync(__dirname+'/target/surefire-reports',filelist);
+    filelist = walkSync('/var/lib/jenkins/workspace/iTrust_2/target/surefire-reports',filelist);
 
     //console.log("FileList: ", filelist);
 
